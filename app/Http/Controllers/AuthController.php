@@ -31,7 +31,7 @@ class AuthController extends Controller
         ]);
         Auth::login($user);
 
-        return redirect("tickets");
+        return redirect("Profile");
     }
 
     public function createLogin()
