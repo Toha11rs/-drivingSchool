@@ -21,8 +21,9 @@ Route::post("/login",[AuthController::class,"storeLogin"]);
 Route::get("/profile",[UserController::class,"index"])->name("Profile")->middleware('auth');;
 
 Route::prefix("test")->group(function (){
-    Route::get("/ticket/{ticketId}",[TestController::class,"ticket"])->name("ticket");
     Route::get("main",[TestController::class,"index"])->name("index");
+    Route::get("/ticket/{ticketId}",[TestController::class,"ticket"])->name("ticket");
+    Route::get("/topic/{topicId}",[TestController::class,"topic"])->name("topic");
 });
 
 
