@@ -21,6 +21,4 @@
 
 
 @include("BladeJs.TopicJS")
-
-
 @endsection

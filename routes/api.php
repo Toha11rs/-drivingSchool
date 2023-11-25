@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get("ticket/{number}", [ExamController::class, "ExaminationTicket"]);
 Route::get("topic/{number}", [ExamController::class, "Topic"]);
 Route::get("topics",[ExamController::class, "topics"]);
-Route::get("exam",[ExamController::class, "exam"]);
+Route::get("tickets",[ExamController::class, "tickets"]);
 
 

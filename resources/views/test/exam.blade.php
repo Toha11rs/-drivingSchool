@@ -22,6 +22,8 @@
 <body>
 <div id="question-container"></div>
 <button id="answer-btn">Ответить</button>
+<p id="counter"></p>
+<p id="result-container"></p>
 <div id="answer-tip"></div>
 <button id="next-question-btn" style="display:none;">Перейти к следующему вопросу</button>
 <table id="result-table" style="display:none;">
@@ -43,6 +45,8 @@
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
         let incorrectAnswers = [];
+        let fakeQuestions = 20;
+        let errorCount = 0;
 
         function initializeQuiz() {
             const ticketId = Math.floor(Math.random() * 40) + 1;
@@ -77,6 +81,8 @@
 
             questionHtml += '</ul></div>';
             $('#question-container').empty().append(questionHtml);
+            let counterElement = document.getElementById('counter');
+            counterElement.textContent = `Вопрос ${currentQuestionIndex + 1} из ${fakeQuestions}`;
         }
 
         function setupEventListeners() {
@@ -105,20 +111,7 @@
             });
         }
 
-        function handleAnswer(isCorrect) {
-            if (isCorrect) {
-                correctAnswers++;
-                $('.question li.selected').addClass('correct');
-            } else {
-                const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct);
-                incorrectAnswers.push({
-                    question_number: questions[currentQuestionIndex].question_number,
-                    your_answer: $('.question li.selected').text(),
-                    correct_answer: correctAnswer.answer
-                });
-                $('.question li.selected').addClass('incorrect');
-            }
-        }
+
 
         function showResults() {
             const table = $('#result-table');
@@ -135,6 +128,78 @@
             });
         }
 
+
+        function loadRandomQuestions() {
+            const apiUrl = 'http://127.0.0.1:8000/api/tickets';
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                success: function (response) {
+                    const randomQuestions = response.slice(0, 5); // Получаем 5 случайных вопросов
+                    questions = [...questions, ...randomQuestions]; // Добавляем к текущим вопросам
+
+                    // Показываем текущий вопрос после добавления новых
+                    showCurrentQuestion();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function handleAnswer(isCorrect) {
+            if (isCorrect) {
+                correctAnswers++;
+                $('.question li.selected').addClass('correct');
+            } else {
+                errorCount++;
+                const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct);
+                incorrectAnswers.push({
+                    question_number: questions[currentQuestionIndex].question_number,
+                    your_answer: $('.question li.selected').text(),
+                    correct_answer: correctAnswer.answer
+                });
+                $('.question li.selected').addClass('incorrect');
+
+                if (incorrectAnswers.length === 1) { // Если это первая ошибка пользователя
+                    loadRandomQuestions(); // Загружаем 5 новых вопросов
+                } else if (incorrectAnswers.length === 2) { // Если это вторая ошибка пользователя
+                    loadRandomQuestions(); // Загружаем еще 5 новых вопросов
+                }
+                console.log(errorCount);
+                if (currentQuestionIndex == 19 && errorCount <= 1) {
+                    
+                    fakeQuestions = 25;
+                }
+                if (currentQuestionIndex == 19 && errorCount >= 2) {
+                    fakeQuestions = 30;
+                }
+
+                else if (currentQuestionIndex === questions.length - 1) { // Если это последний вопрос
+                    showFinalResult(); // Показываем итоговый результат
+                }
+            }
+        }
+
+        function showFinalResult() {
+            let resultMessage = '';
+
+            if (incorrectAnswers.length > 2) {
+                resultMessage = 'Экзамен не сдан';
+            } else {
+                resultMessage = 'Экзамен сдан';
+            }
+
+            const resultContainer = $('#result-container');
+            resultContainer.empty().text(resultMessage);
+
+            if (incorrectAnswers.length > 2) {
+                resultContainer.css('background-color', 'red');
+            } else {
+                resultContainer.css('background-color', 'green');
+            }
+            resultContainer.show();
+        }
         initializeQuiz();
     });
 
