@@ -34,6 +34,6 @@ class TestController extends Controller
     {
         $questions = Questions::with('answers')->where("topic_id", $topicId)->get();
 
-        return view("test.topic", compact("questions"));
+        return view("test.topic", compact("questions","topicId"));
     }
 }

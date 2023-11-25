@@ -1,43 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Тест ПДД</title>
-    <style>
-        .question {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .selected {
-            background-color: yellow;
-        }
-        .correct {
-            background-color: green;
-        }
-        .incorrect {
-            background-color: red;
-        }
-    </style>
-</head>
-<body>
-<div id="question-container"></div>
-<button id="answer-btn">Ответить</button>
-<div id="answer-tip"></div>
-<button id="next-question-btn" style="display:none;">Перейти к следующему вопросу</button>
-<table id="result-table" style="display:none;">
-    <thead>
-    <tr>
-        <th>Номер вопроса</th>
-        <th>Ваш ответ</th>
-        <th>Правильный ответ</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     $(document).ready(function() {
 
 
@@ -45,23 +7,23 @@
 
         const regex = /\/ticket\/(\d+)/;
         const match = currentURL.match(regex);
-        
+        console.log(match)
         if (match && match[1]) {
             const ticketId = match[1];
             console.log(ticketId);
             const apiUrl = `http://127.0.0.1:8000/api/ticket/${ticketId}`;
 
-        $.ajax({
-            url: apiUrl,
-            method: 'GET',
-            success: function(response) {
-                questions = response;
-                showQuestion(currentQuestionIndex);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                success: function(response) {
+                    questions = response;
+                    showQuestion(currentQuestionIndex);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         }
 
         let questions = [];
@@ -155,5 +117,3 @@
     });
 
 </script>
-</body>
-</html>
