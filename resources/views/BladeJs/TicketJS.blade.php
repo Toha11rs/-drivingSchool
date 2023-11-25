@@ -1,5 +1,5 @@
-<script>
-
+<Script src="https://code.jquery.com/jquery-3.6.0.min.js"></Script>
+<Script>
     $(document).ready(function() {
 
 
@@ -7,7 +7,7 @@
 
         const regex = /\/ticket\/(\d+)/;
         const match = currentURL.match(regex);
-        console.log(match)
+
         if (match && match[1]) {
             const ticketId = match[1];
             console.log(ticketId);
@@ -116,4 +116,4 @@
 
     });
 
-</script>
+</Script>
