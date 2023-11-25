@@ -13,7 +13,15 @@ class Answers extends Model
 
     public function question()
     {
-        return $this->belongsTo(Questions::class);
+        return $this->belongsTo(Questions::class, "question_id");
+    }
+
+    public function getRusAnswersAttribute()
+    {
+        return [
+            'answer' => $this->answer,
+            'is_correct' => $this->is_correct,
+        ];
     }
 
     use HasFactory;

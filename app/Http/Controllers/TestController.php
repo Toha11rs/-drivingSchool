@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answers;
 use App\Models\Questions;
 use App\Models\Topics;
 use Illuminate\Http\Request;
@@ -26,8 +27,8 @@ class TestController extends Controller
     //тренировка по темам
     public function topic($topicId)
     {
-        $quetions = Questions::where("topic_id",$topicId)->get();
-//        $quetions = response($quetions)->json;
-        return view("test.topic",compact("quetions"));
+        $questions = Questions::with('answers')->where("topic_id", $topicId)->get();
+
+        return view("test.topic",compact("questions"));
     }
 }
