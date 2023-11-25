@@ -36,9 +36,10 @@
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
             <p>${question.question}</p>
-            <img src="${question.image}" alt="">
-            <ul>`;
+            <img src="${question.image}" alt="sdf">
 
+            <ul>`;
+            console.log(question.image);
             question.answers.forEach(answer => {
                 questionHtml += `<li data-answer-id="${answer.id}">${answer.answer}</li>`;
             });

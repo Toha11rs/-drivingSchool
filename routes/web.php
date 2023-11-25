@@ -33,18 +33,29 @@ Route::prefix("test")->group(function (){
 
 
 
+//Route::get('test1', function () {
+//    $answers = Answers::pluck('question_id')->unique()->sort();
+//
+//    $missingIds = [];
+//    for ($i = 1; $i <= 819; $i++) {
+//        if (!$answers->contains($i)) {
+//            $missingIds[] = $i;
+//        }
+//    }
+//
+//    // Теперь $missingIds содержит пропущенные question_id
+//    dd($missingIds);
+
 Route::get('test1', function () {
-    $answers = Answers::pluck('question_id')->unique()->sort();
+    $answers = Questions::all();
 
-    $missingIds = [];
-    for ($i = 1; $i <= 819; $i++) {
-        if (!$answers->contains($i)) {
-            $missingIds[] = $i;
-        }
-    }
-
-    // Теперь $missingIds содержит пропущенные question_id
-    dd($missingIds);
+   foreach ($answers as $answer){
+       $img = $answer->image;
+       $update = substr($img, 1);
+       $answer->update([
+          "image"=>$update
+       ]);
+   }
 
 });
 
