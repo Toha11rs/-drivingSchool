@@ -45,9 +45,10 @@
 
         const regex = /\/ticket\/(\d+)/;
         const match = currentURL.match(regex);
-        console.log(match[1]);
+        console.log(match)
         if (match && match[1]) {
             const ticketId = match[1];
+            console.log(ticketId);
             const apiUrl = `http://127.0.0.1:8000/api/ticket/${ticketId}`;
 
         $.ajax({
@@ -69,8 +70,7 @@
         let incorrectAnswers = [];
 
         function showQuestion(index) {
-            const question = questions[2];
-            console.log(question);
+            const question = questions[index];
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
             <p>${question.question}</p>

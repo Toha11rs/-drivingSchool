@@ -21,14 +21,19 @@ class TestController extends Controller
     //тренировка по билетам
     public function ticket()
     {
-
         return view("test.ticket");
     }
+
+    public function exam()
+    {
+        return view("test.exam");
+    }
+
     //тренировка по темам
     public function topic($topicId)
     {
         $questions = Questions::with('answers')->where("topic_id", $topicId)->get();
 
-        return view("test.topic",compact("questions"));
+        return view("test.topic", compact("questions"));
     }
 }

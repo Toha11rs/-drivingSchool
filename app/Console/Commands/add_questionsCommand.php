@@ -35,7 +35,7 @@ class add_questionsCommand extends Command
 //        $questions = json_decode(file_get_contents('C:\Users\AAAAA\Desktop\pdd_russia-master\questions\A_B\tickets\Билет $i.json)', true);
             $questions = json_decode(file_get_contents("C:\Users\AAAAA\Desktop\pdd_russia-master\questions\A_B\\tickets\Билет $i.json"), true);
 
-            try {
+
 
 
                 foreach ($questions as $question) {
@@ -67,9 +67,7 @@ class add_questionsCommand extends Command
 
 
                 }
-            } catch (\Exception $e) {
-                dd($e->getMessage());
-            }
+
         }
     }
 }

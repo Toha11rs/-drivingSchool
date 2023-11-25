@@ -21,16 +21,32 @@ Route::post("/login",[AuthController::class,"storeLogin"]);
 Route::get("/profile",[UserController::class,"index"])->name("Profile")->middleware('auth');;
 
 Route::prefix("test")->group(function (){
-    Route::get("main",[TestController::class,"index"])->name("index");
+    Route::get("",[TestController::class,"index"])->name("index");
     Route::get("/ticket/{ticketId}",[TestController::class,"ticket"])->name("ticket");
     Route::get("/topic/{topicId}",[TestController::class,"topic"])->name("topic");
+    Route::get("/exam",[TestController::class,"exam"])->name("exam");
+
+
+});
+
+
+
+
+
+Route::get('test1', function () {
+    $answers = Answers::pluck('question_id')->unique()->sort();
+
+    $missingIds = [];
+    for ($i = 1; $i <= 819; $i++) {
+        if (!$answers->contains($i)) {
+            $missingIds[] = $i;
+        }
+    }
+
+    // Теперь $missingIds содержит пропущенные question_id
+    dd($missingIds);
+
 });
 
 
 
-
-Route::get('test', function () {
-
-
-
-});

@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Тест ПДД</title>
-
 </head>
 <body>
 <h1>Билеты ПДД (категория A и B)</h1>
@@ -12,14 +11,13 @@
   <a href="{{route("ticket",["ticketId"=>$i])}}">  Билет № {{$i}}</a>
     @endfor
 
+<br>
+<a href="{{route("exam")}}"> <p>Экзамен </p></a>
 
-@foreach($topics as $topic)
+<p id="openModalBtn">Выбрать тему</p>
+
+@include("test.modal.topicModal")
 
 
-    <a href="{{route("topic",["topicId"=>$topic->id])}}"> <p>   {{$topic->topic}}  </p>  </a>
-
-
-@endforeach
 </body>
-
 </html>
