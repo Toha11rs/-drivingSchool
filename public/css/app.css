@@ -1,0 +1,37 @@
+/* Стили для выделения выбранного вопроса и подсветки правильного/неправильного ответа */
+.selected {
+    background-color: #ffffb2;
+}
+
+.correct {
+    background-color: #91ff91;
+}
+
+.incorrect {
+    background-color: #ff7272;
+}
+
+/* Стили для квадратиков прогресса */
+#progress {
+    display: flex;
+    margin-top: 20px;
+}
+
+.square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.question {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
