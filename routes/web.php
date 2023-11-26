@@ -4,12 +4,21 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\UserController;
+<<<<<<< HEAD
+=======
+use \App\Http\Controllers\mainController;
+
+>>>>>>> f6dc55b3a5f913a759a997084d02c7e039ef4daa
 
 use \App\Models\Questions;
 use \App\Models\Answers;
 use \App\Models\Topics;
 
+<<<<<<< HEAD
 
+=======
+Route::get("/", [mainController::class,"main"])->name("main");
+>>>>>>> f6dc55b3a5f913a759a997084d02c7e039ef4daa
 
 Route::get("/register",[AuthController::class,"create"])->name("register");
 Route::post("/register",[AuthController::class,"store"])->name("register");
