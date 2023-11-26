@@ -24,6 +24,12 @@ class TestController extends Controller
         return view("test.ticket");
     }
 
+    public function ticketStore(Request $request)
+    {
+        dd($request->all());
+        return view("test.ticket");
+    }
+
     public function exam()
     {
         return view("test.exam");
@@ -34,6 +40,6 @@ class TestController extends Controller
     {
         $questions = Questions::with('answers')->where("topic_id", $topicId)->get();
 
-        return view("test.topic", compact("questions","topicId"));
+        return view("test.topic", compact("questions", "topicId"));
     }
 }

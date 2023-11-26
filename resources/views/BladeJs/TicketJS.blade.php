@@ -104,6 +104,7 @@
                 table.show();
                 const tbody = table.find('tbody');
 
+                console.log("POST ОТПРАВЛЕНО");
                 incorrectAnswers.forEach(item => {
                     const row = `<tr>
                     <td>${item.question_number}</td>
@@ -113,8 +114,35 @@
                     tbody.append(row);
                 });
             }
+            saveStatistics(correctAnswers, incorrectAnswers);
         }
-
     });
+
+    function saveStatistics(correctAnswers, incorrectAnswers) {
+        const currentURL = window.location.href;
+        const regex = /\/ticket\/(\d+)/;
+        const match = currentURL.match(regex);
+        const ticketId = match[1];
+        const apiUrl = `{{ route('ticketStore', ['ticketId' => ':ticketId']) }}`.replace(':ticketId', ticketId);
+
+
+        $.ajax({
+            url: apiUrl,
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                correctAnswers: correctAnswers,
+                incorrectAnswers: incorrectAnswers
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+    }
 
 </Script>

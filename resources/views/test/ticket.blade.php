@@ -20,6 +20,6 @@
     <tbody>
     </tbody>
 </table>
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @include("BladeJs.TicketJS")
 @endsection
