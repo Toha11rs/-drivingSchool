@@ -61,90 +61,73 @@
     </section>
   </div>
 
+  
+<div class="section-services">
+  <a href="#" class="services-item col-md-4 col-sm-6">
+    <h3 class="service-item__title">Занимайся на сайте где угодно и когда удобно</h3>
+    <p class="sizepp service-item__title" >Доступ 24/7 к 800+ урокам теории останется у тебя даже после окончания обучения </p>
+    
+  </a>
+
+  <a href="#" class="services-item col-md-4 col-sm-6 brick">
+    <h3 class="service-item__title">Учи теорию онлайн</h3>
+    <p class="sizepp service-item__title">Видеоуроки на конкретных примерах простым языком после каждого проходи тест и закрепляй знания</p>
+  </a>
+
+  <a href="#" class="services-item col-md-4 brown">
+    <h3 class="service-item__title">Учись водить</h3>
+    <p class="sizepp service-item__title">Выбирай инструктора на сайте, договаривайся о встрече в удобное время и улучшай навыки вождения</p>
+    
+  </a>
+</div>
 
 
 <div class="container">
-  <div class="section">
-    <div class="wrap">
-      <div class="contacts-info">
-    <ul class="main-contacts table-list">
-      <li class="address ie_css3" style="background: #46A5FF;">
-        <div class="info">
-        <div class="caption centerh1">Занимайся на сайте где угодно и когда удобно <br></div>
-        <p class="sizepp" style="width:270px"><br>Доступ 24/7 к 800+ урокам теории останется у тебя даже после окончания обучения </p>
-        </div>
-      </li>
-
-      <li class="ie_css3">
-        <div class="info">
-          <div class="caption centerh1 nizname">Учи теорию онлайн</div>
-          <p class="sizepp">Видеоуроки на конкретных примерах простым языком <br> после каждого проходи тест и закрепляй знания</p>
-          <a href="/" class="button button--primary btn-fx-4"><span>Подробнее</span></a>
-        </div>
-      </li>
-      <li class="ie_css3" style="background: #46A5FF;">
-        <div class="info">
-          <div class="caption centerh1 nizname">Учись водить</div>
-          <p class="sizepp">
-            Выбирай инструктора на сайте, договаривайся о встрече в удобное время и улучшай навыки вождения
-          </p>
-          <a href="/" class="button button--primary btn-fx-4"><span>Подробнее</span></a>
-        </div>
-      </li>
-    </ul>
-  </div>
- </div>
-</div>
-
 
 <div class="centerh1">
   <h1>Выбери свой курс обучения</h1>
 </div>
 
 
-<div class="section">
-  <div class="wrap">
-   <div class="contacts-info">
-     <ul class="main-contacts table-list">
-      <li class="ie_css3">
-        <div class="info">
-          <div class="caption centerh1 nizname">Начальный</div>
-          <p class="sizepp">Пройдешь полный курс теории и пробное занятие с инструктором</p>
-          <p>-Бессрочный доступ к урокам теории</p>
-          <p>-Теория онлайн или очно</p>
-          <p>-14 занятий по вождению и 1 занятия по маршруту ГИБДД</p>
-          <p>-Документы для ГИБДД</p>
-          <div class="caption centerh1"><span class="nizname">Цена</span><a href="/" class="button button--primary btn-fx-4"><span>Выбрать курс</span></a></div>
-        </div>
-      </li>
- 
-       <li class="ie_css3" style="background: #46A5FF;">
-          <div class="info">
-            <div class="caption centerh1 nizname">Стандарт</div>
-              <p class="sizepp">Научишься водить и отработаешь частые маршруты</p>
-              <p>-Бессрочный доступ к урокам теории</p>
-              <p>-Теория онлайн или очно</p>
-              <p>-20 занятий по вождению и 4 занятия по маршруту ГИБДД</p>
-              <p>-Документы для ГИБДД</p>
-              <div class="caption centerh1 nizname"><span class="nizname">Цена</span><a href="/" class="button button--primary btn-fx-4"><span>Выбрать курс</span></a></div>
-            </div>
-       </li>
+<ul class="category_list row">
+  <li>
+    <a href="#">
+      <picture>
+        <source srcset="\images\main\akpp.jpg" type="image/jpg">
+        <img alt="Категория В АКПП" src="\images\main\akpp.jpg" title="Категория В АКПП">  
+      </picture>
+      <span class="category_name">
+        Категория<span>«В»</span><b>АКПП</b>31 500₽</span>
+      </span>
+      <span class="category_price">Выбрать курс</span>
+      </a>
+  </li>
 
-      <li class="ie_css3">
-        <div class="info">
-          <div class="caption centerh1 nizname">Премиум</div>
-          <p class="sizepp">Сдашь экзамены и получишь права категории В</p>
-          <p>-Бессрочный доступ к урокам теории</p>
-          <p>-Теория онлайн или очно</p>
-          <p>-28 занятий по вождению и 8 занятия по маршруту ГИБДД</p>
-          <p>-Документы для ГИБДД</p>
-          <div class="caption centerh1"><span class="nizname">Цена</span> <a href="/" class="button button--primary btn-fx-4"><span>Выбрать курс</span></a></div>
-        </div>
-      </li>
-     </ul>
-   </div>
-  </div>
-</div>
+  <li>
+    <a href="#">
+      <picture>
+        <source srcset="\images\main\mkpp.jpg" type="image/jpg">
+        <img alt="Категория В МКПП" src="\images\main\mkpp.jpg" title="Категория В МКПП">  
+      </picture>
+      <span class="category_name">
+        Категория<span>«В»</span><b>МКПП</b>28 500₽</span>
+      </span>
+      <span class="category_price">Выбрать курс</span>
+      </a>
+  </li>
+  <li>
+    <a href="#">
+      <picture>
+        <source srcset="\images\main\vip.jpg" type="image/jpg">
+        <img alt="Категория В VIP" src="\images\main\vip.jpg" title="Категория В VIP">  
+      </picture>
+      <span class="category_name">
+        Категория<span>«В»</span><b>VIP</b>35 000₽</span>
+      </span>
+      <span class="category_price">Выбрать курс</span>
+      </a>
+  </li>
+</ul>
 
 <div class="frame1">
   <div class="text-wrapper">Наши инструктора</div>
