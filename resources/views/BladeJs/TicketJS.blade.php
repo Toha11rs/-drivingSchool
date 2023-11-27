@@ -35,13 +35,14 @@
             const question = questions[index];
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
-            <p>${question.question}</p>
             <img src="${question.image}" alt="sdf">
+            <p class="questions">${question.question}</p>
+           
 
             <ul>`;
             console.log(question.image);
             question.answers.forEach(answer => {
-                questionHtml += `<li data-answer-id="${answer.id}">${answer.answer}</li>`;
+                questionHtml += `<li class="question-var" data-answer-id="${answer.id}">${answer.answer}</li>`;
             });
 
             questionHtml += '</ul></div>';
