@@ -10,7 +10,6 @@
 
         if (match && match[1]) {
             const ticketId = match[1];
-            console.log(ticketId);
             const apiUrl = `http://127.0.0.1:8000/api/ticket/${ticketId}`;
 
             $.ajax({
@@ -30,17 +29,19 @@
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
         let incorrectAnswers = [];
-
+        let CountIncorrectAnswers = 0;
         function showQuestion(index) {
+
+            // submitFormWithAnswers(correctAnswers, CountIncorrectAnswers)
+
             const question = questions[index];
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
             <img src="${question.image}" alt="sdf">
             <p class="questions">${question.question}</p>
-           
+
 
             <ul>`;
-            console.log(question.image);
             question.answers.forEach(answer => {
                 questionHtml += `<li class="question-var" data-answer-id="${answer.id}">${answer.answer}</li>`;
             });
@@ -68,12 +69,14 @@
                     selectedAnswer.addClass('correct');
                     correctAnswers++;
                 } else {
+                    CountIncorrectAnswers++;
                     selectedAnswer.addClass('incorrect');
                     const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct).answer;
                     incorrectAnswers.push({
                         question_number: questions[currentQuestionIndex].question_number,
                         your_answer: selectedAnswer.text(),
-                        correct_answer: correctAnswer
+                        correct_answer: correctAnswer,
+                        question_id: questions[currentQuestionIndex].id
                     });
                 }
 
@@ -82,6 +85,7 @@
 
                 // Display answer tip
                 $('#answer-tip').text(answerTip).show();
+
             }
         });
 
@@ -100,6 +104,7 @@
         });
 
         function showResults() {
+            submitFormWithAnswers(correctAnswers, incorrectAnswers)
             if (incorrectAnswers.length > 0) {
                 const table = $('#result-table');
                 table.show();
@@ -115,35 +120,22 @@
                     tbody.append(row);
                 });
             }
-            saveStatistics(correctAnswers, incorrectAnswers);
+
         }
     });
 
-    function saveStatistics(correctAnswers, incorrectAnswers) {
-        const currentURL = window.location.href;
-        const regex = /\/ticket\/(\d+)/;
-        const match = currentURL.match(regex);
-        const ticketId = match[1];
-        const apiUrl = `{{ route('ticketStore', ['ticketId' => ':ticketId']) }}`.replace(':ticketId', ticketId);
+    function submitFormWithAnswers(correctAnswers, incorrectAnswers) {
 
+        const form = document.getElementById('myForm');
 
-        $.ajax({
-            url: apiUrl,
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                correctAnswers: correctAnswers,
-                incorrectAnswers: incorrectAnswers
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error)
-            }
-        });
+        let stringifiedIncorrectAnswers = JSON.stringify(incorrectAnswers);
+        form.querySelector('input[name="correctAnswers"]').value = correctAnswers;
+        form.querySelector('input[name="incorrectAnswers"]').value = stringifiedIncorrectAnswers;
+
+        form.submit();
     }
+
+
+
 
 </Script>

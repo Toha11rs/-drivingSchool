@@ -26,8 +26,17 @@ class TestController extends Controller
 
     public function ticketStore(Request $request)
     {
-        dd($request->all());
-        return view("test.ticket");
+        $requestData = $request->all();
+
+
+
+        $incorrectAnswers = $request->input('incorrectAnswers');
+
+
+       $result  =["CountCorrectAnswers"=>count(json_decode($incorrectAnswers)),"CountIncorrectAnswers"=>(json_decode($incorrectAnswers))];
+        $CountIncorrectAnswers = $result["CountIncorrectAnswers"];
+        dd(json_decode($incorrectAnswers));
+        return $result;
     }
 
     public function exam()

@@ -5,6 +5,7 @@
 @section('title', 'Тестовый билет')
 @section('content')
 <body>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div id="question-container"></div>
 <button id="answer-btn">Ответить</button>
 <div id="answer-tip"></div>
@@ -22,4 +23,12 @@
 </table>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include("BladeJs.TicketJS")
+
+<form id="myForm" action="{{route("ticketStore",["ticketId"=>2])}}" method="post">
+    @csrf
+    <input type="hidden" name="correctAnswers" >
+    <input type="hidden" name="incorrectAnswers" >
+
+    <input type="hidden" value="Отправить">
+</form>
 @endsection
