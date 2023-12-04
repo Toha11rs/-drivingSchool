@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Answers;
 use App\Models\Questions;
+use App\Models\Statistics;
 use App\Models\Topics;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -26,17 +28,21 @@ class TestController extends Controller
 
     public function ticketStore(Request $request)
     {
-        $requestData = $request->all();
 
+        $incorrectAnswers = $request->input('correctAnswers');
+        $result = json_decode($incorrectAnswers);
+        $user = Auth::user();
+        foreach ($result as $answer){
 
+            Statistics::create([
+               "user_id"=>$user->id,
+               "question_id" => $answer->question_id,
+                "is_correct"=>$answer->is_correct,
+                "type"=>$answer->type,
 
-        $incorrectAnswers = $request->input('incorrectAnswers');
-
-
-       $result  =["CountCorrectAnswers"=>count(json_decode($incorrectAnswers)),"CountIncorrectAnswers"=>(json_decode($incorrectAnswers))];
-        $CountIncorrectAnswers = $result["CountIncorrectAnswers"];
-        dd(json_decode($incorrectAnswers));
-        return $result;
+            ]);
+        }
+        return 1;
     }
 
     public function exam()

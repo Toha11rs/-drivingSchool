@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
+            $table ->bigInteger("user_id")->nullable();
+            $table->bigInteger("question_id")->nullable();
+            $table->boolean("is_correct");
             $table->timestamps();
         });
     }

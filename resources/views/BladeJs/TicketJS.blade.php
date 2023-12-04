@@ -29,6 +29,7 @@
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
         let incorrectAnswers = [];
+        let UserAnswer = [];
         let CountIncorrectAnswers = 0;
         function showQuestion(index) {
 
@@ -66,9 +67,20 @@
                 selectedAnswer.removeClass('selected');
 
                 if (isCorrect) {
+                    UserAnswer.push({
+                        is_correct:true,
+                        question_id: questions[currentQuestionIndex].id,
+                        type:"ticket"
+                    });
+
                     selectedAnswer.addClass('correct');
                     correctAnswers++;
                 } else {
+                    UserAnswer.push({
+                        is_correct:false,
+                        question_id: questions[currentQuestionIndex].id,
+                        type:"ticket",
+                    });
                     CountIncorrectAnswers++;
                     selectedAnswer.addClass('incorrect');
                     const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct).answer;
@@ -104,7 +116,7 @@
         });
 
         function showResults() {
-            submitFormWithAnswers(correctAnswers, incorrectAnswers)
+            submitFormWithAnswers(UserAnswer)
             if (incorrectAnswers.length > 0) {
                 const table = $('#result-table');
                 table.show();
@@ -124,13 +136,13 @@
         }
     });
 
-    function submitFormWithAnswers(correctAnswers, incorrectAnswers) {
+    function submitFormWithAnswers(UserAnswer) {
 
         const form = document.getElementById('myForm');
 
-        let stringifiedIncorrectAnswers = JSON.stringify(incorrectAnswers);
-        form.querySelector('input[name="correctAnswers"]').value = correctAnswers;
-        form.querySelector('input[name="incorrectAnswers"]').value = stringifiedIncorrectAnswers;
+        let stringifiedIncorrectAnswers = JSON.stringify(UserAnswer);
+        form.querySelector('input[name="correctAnswers"]').value = stringifiedIncorrectAnswers;
+        form.querySelector('input[name="incorrectAnswers"]').value = UserAnswer;
 
         form.submit();
     }
