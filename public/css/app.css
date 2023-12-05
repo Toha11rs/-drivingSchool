@@ -5,6 +5,7 @@
     display: block;
     background-color: #f2f2f2;
     color: #000;
+    border-radius: 10px;
 }
 
 
@@ -41,6 +42,7 @@
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
+    
 }
 
  .pdd-ticket {
@@ -55,3 +57,28 @@
     font-size: 25px;
 }
 
+.buttonnext {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #2d972d;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.centerque{
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hint-text {
+    margin-top: 10px;
+    background-color: #fffae5;
+    padding: 10px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
