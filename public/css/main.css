@@ -1630,3 +1630,38 @@ svg {
       flex-basis:100%
   }
 }
+
+
+
+.arrows_ozmHN {
+  bottom: 8%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+  width: 130px;
+  z-index: 5;
+}
+
+.UiSliderArrow._outline_arrow {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid rgba(40,36,35,.2);
+  border-radius: 8px;
+  color: #282423;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  transition: all .2s linear;
+  width: 40px;
+}
+
+.UiSliderArrow._outline_arrow .icon {
+  color: inherit;
+  height: 20px;
+  outline: none;
+  position: relative;
+  transition: all .2s linear;
+  width: 20px;
+}
