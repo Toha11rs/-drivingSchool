@@ -32,14 +32,15 @@
         let UserAnswer = [];
         let CountIncorrectAnswers = 0;
         function showQuestion(index) {
-
-            // submitFormWithAnswers(correctAnswers, CountIncorrectAnswers)
-
             const question = questions[index];
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
             <img src="${question.image}" alt="sdf">
             <p class="questions">${question.question}</p>
+
+            <img class="centerque" src="${question.image}" alt="sdf">
+            <p class="questions centerque">${question.question}</p>
+
 
 
             <ul>`;
@@ -47,7 +48,7 @@
                 questionHtml += `<li class="question-var" data-answer-id="${answer.id}">${answer.answer}</li>`;
             });
 
-            questionHtml += '</ul></div>';
+            questionHtml += '</ul><div class="hint-text" id="answer-tip"></div> <button class="buttonnext" id="answer-btn">Ответить</button><button id="next-question-btn" class="buttonnext" style="display:none;">Перейти к следующему вопросу</button></div>';
             $('#question-container').empty().append(questionHtml);
         }
 
@@ -96,6 +97,7 @@
                 $('#next-question-btn').show();
 
                 // Display answer tip
+                $('#answer-tip').text("Пояснение к ответу: " + answerTip).show();
                 $('#answer-tip').text(answerTip).show();
 
             }
