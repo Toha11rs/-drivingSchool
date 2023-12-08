@@ -35,8 +35,7 @@
             const question = questions[index];
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
-            <img src="${question.image}" alt="sdf">
-            <p class="questions">${question.question}</p>
+           
 
             <img class="centerque" src="${question.image}" alt="sdf">
             <p class="questions centerque">${question.question}</p>
