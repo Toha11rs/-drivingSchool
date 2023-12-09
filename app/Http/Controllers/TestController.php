@@ -6,18 +6,24 @@ use App\Models\Answers;
 use App\Models\Questions;
 use App\Models\Statistics;
 use App\Models\Topics;
+use App\Services\UserServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
 
-    public function index()
+    public function index(UserServices $userServices)
     {
-        $questions = Questions::all();
+        $user = Auth::user();
         $topics = Topics::all();
+        $color_exam = $userServices->GetColorUser($user);
 
-        return view("test.main", compact("questions", "topics"));
+
+        return view("test.main", compact(
+            "topics",
+            "color_exam"
+        ));
     }
 
     //тренировка по билетам
@@ -42,7 +48,7 @@ class TestController extends Controller
 
             ]);
         }
-        return 1;
+        return redirect()->back();
     }
 
     public function exam()

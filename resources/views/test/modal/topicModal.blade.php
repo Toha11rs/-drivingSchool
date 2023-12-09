@@ -1,7 +1,6 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <!-- Содержимое модального окна -->
         @foreach($topics as $topic)
             <a href="{{ route('topic', ['topicId' => $topic->id]) }}"><p>{{ $topic->topic }}</p></a>
         @endforeach
@@ -13,17 +12,14 @@
     let btn = document.getElementById('openModalBtn');
     let span = document.getElementsByClassName('close')[0];
 
-    // Открываем модальное окно при клике на кнопку
     btn.onclick = function() {
         modal.style.display = 'block';
     };
 
-    // Закрываем модальное окно при клике на "закрыть"
     span.onclick = function() {
         modal.style.display = 'none';
     };
 
-    // Закрываем модальное окно при клике вне модального окна
     window.onclick = function(event) {
         if (event.target === modal) {
             modal.style.display = 'none';
@@ -52,8 +48,8 @@
         border: 1px solid #888;
         width: 30%;
         height: 100rem;
-        max-height: 40rem; /* Задаем максимальную высоту блока контента */
-        overflow: auto; /* Добавляем прокрутку к блоку контента */
+        max-height: 40rem;
+        overflow: auto;
     }
 
     .close {

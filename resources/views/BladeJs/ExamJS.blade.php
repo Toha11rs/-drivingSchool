@@ -6,6 +6,8 @@
         let incorrectAnswers = [];
         let fakeQuestions = 20;
         let errorCount = 0;
+        let UserAnswer = [];
+
 
         function initializeQuiz() {
             const ticketId = Math.floor(Math.random() * 40) + 1;
@@ -137,6 +139,7 @@
 
                 else if (currentQuestionIndex === questions.length - 1) { // Если это последний вопрос
                     showFinalResult(); // Показываем итоговый результат
+                    submitFormWithAnswers();
                 }
             }
         }
@@ -161,6 +164,18 @@
             resultContainer.show();
         }
         initializeQuiz();
+
+        function submitFormWithAnswers(UserAnswer) {
+
+            const form = document.getElementById('myForm');
+
+            let stringifiedIncorrectAnswers = JSON.stringify(UserAnswer);
+            form.querySelector('input[name="correctAnswers"]').value = stringifiedIncorrectAnswers;
+            form.querySelector('input[name="incorrectAnswers"]').value = UserAnswer;
+
+            form.submit();
+        }
+
     });
 
 </script>

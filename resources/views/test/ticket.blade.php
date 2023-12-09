@@ -27,11 +27,9 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include("BladeJs.TicketJS")
 
-<form id="myForm" action="{{route("ticketStore",["ticketId"=>2])}}" method="post">
+<form id="myForm" action="{{route("ticketStore")}}" method="post">
     @csrf
     <input type="hidden" name="correctAnswers" >
     <input type="hidden" name="incorrectAnswers" >
-
-    <input type="hidden" value="Отправить">
 </form>
 @endsection

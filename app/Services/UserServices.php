@@ -48,4 +48,25 @@ class UserServices
         return $result;
 
     }
+
+    public function GetColorUser($user){
+
+        $color_exam = [];
+        for ($i = 1; $i < 41; $i++) {
+            $colorUser = Statistics::where("user_id", $user->id)
+                ->where("question_id", $i)
+                ->pluck("is_correct")
+                ->first();
+            if(isset($colorUser)){
+                if ($colorUser == 1) {
+                    $color_exam[$i] = "green";
+                } elseif ($colorUser == 0) {
+                    $color_exam[$i] = "red";
+                }
+            } else {
+                $color_exam[$i] = "gray";
+            }
+        }
+        return $color_exam;
+    }
 }

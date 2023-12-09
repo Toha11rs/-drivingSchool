@@ -31,23 +31,24 @@
         let incorrectAnswers = [];
         let UserAnswer = [];
         let CountIncorrectAnswers = 0;
+        let ticket_number = 0;
+
+
         function showQuestion(index) {
             const question = questions[index];
+            ticket_number = question.ticket_number;
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
-           
-
             <img class="centerque" src="${question.image}" alt="sdf">
             <p class="questions centerque">${question.question}</p>
-
-
-
             <ul>`;
+
             question.answers.forEach(answer => {
                 questionHtml += `<li class="question-var" data-answer-id="${answer.id}">${answer.answer}</li>`;
             });
 
-            questionHtml += '</ul><div class="hint-text" id="answer-tip"></div> <button class="buttonnext" id="answer-btn">Ответить</button><button id="next-question-btn" class="buttonnext" style="display:none;">Перейти к следующему вопросу</button></div>';
+            questionHtml += '</ul><div class="hint-text" id="answer-tip"></div> <button class="buttonnext" id="answer-btn">Ответить</button>' +
+                '<button id="next-question-btn" class="buttonnext" style="display:none;">Перейти к следующему вопросу</button></div>';
             $('#question-container').empty().append(questionHtml);
         }
 
@@ -67,29 +68,30 @@
                 selectedAnswer.removeClass('selected');
 
                 if (isCorrect) {
-                    UserAnswer.push({
-                        is_correct:true,
-                        question_id: questions[currentQuestionIndex].id,
-                        type:"ticket"
-                    });
+                    // UserAnswer.push({
+                    //     is_correct:true,
+                    //     question_id: questions[currentQuestionIndex].id,
+                    //     type:"ticket"
+                    // });
 
                     selectedAnswer.addClass('correct');
                     correctAnswers++;
                 } else {
-                    UserAnswer.push({
-                        is_correct:false,
-                        question_id: questions[currentQuestionIndex].id,
-                        type:"ticket",
-                    });
+                    // UserAnswer.push({
+                    //     is_correct:false,
+                    //     question_id: questions[currentQuestionIndex].id,
+                    //     type:"ticket",
+                    // });
                     CountIncorrectAnswers++;
                     selectedAnswer.addClass('incorrect');
-                    const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct).answer;
-                    incorrectAnswers.push({
-                        question_number: questions[currentQuestionIndex].question_number,
-                        your_answer: selectedAnswer.text(),
-                        correct_answer: correctAnswer,
-                        question_id: questions[currentQuestionIndex].id
-                    });
+
+                const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct).answer;
+                incorrectAnswers.push({
+                    question_number: questions[currentQuestionIndex].question_number,
+                    your_answer: selectedAnswer.text(),
+                    correct_answer: correctAnswer,
+                    question_id: questions[currentQuestionIndex].id
+                });
                 }
 
                 $('#answer-btn').hide();
@@ -117,7 +119,6 @@
         });
 
         function showResults() {
-            submitFormWithAnswers(UserAnswer)
             if (incorrectAnswers.length > 0) {
                 const table = $('#result-table');
                 table.show();
@@ -134,6 +135,22 @@
                 });
             }
 
+            if (incorrectAnswers.length > 3) {
+                UserAnswer.push({
+                    is_correct:false,
+                    question_id: ticket_number,
+                    type:"ticket"
+                });
+            }
+            else{
+                UserAnswer.push({
+                    is_correct:true,
+                    question_id: ticket_number,
+                    type:"ticket"
+                });
+            }
+
+            submitFormWithAnswers(UserAnswer)
         }
     });
 

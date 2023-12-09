@@ -8,11 +8,12 @@
 
 
 @for ($i = 1; $i < 41; $i++)
-  <a href="{{route("ticket",["ticketId"=>$i])}}">  Билет № {{$i}}</a>
-    @endfor
-
-<br>
-<a href="{{route("exam")}}"> <p>Экзамен </p></a>
+    <div class="square" style="background-color: {{ $color_exam[$i] }}">
+        <a href="{{ route("ticket", ["ticketId" => $i]) }}">Билет № {{ $i }}</a>
+    </div>
+    <br>
+@endfor
+<a href="{{ route("exam") }}"><p>Экзамен</p></a>
 
 <p id="openModalBtn">Выбрать тему</p>
 
@@ -21,3 +22,11 @@
 
 </body>
 </html>
+<style>
+    .square {
+        width: 50px;
+        height: 50px;
+        outline: 2px solid #000;
+        /*border-radius: 10px;*/
+    }
+</style>

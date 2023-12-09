@@ -6,6 +6,8 @@
     let nextButton = document.getElementById('next-btn');
     let selectedAnswer = null;
     let answeredQuestions = new Array(questions.length).fill(false);
+    let UserAnswer = [];
+
 
     function showQuestion() {
         if (currentQuestionIndex < questions.length) {
@@ -120,6 +122,17 @@
         resultText.textContent = '';
     });
 
+    function submitFormWithAnswers(UserAnswer) {
+
+        const form = document.getElementById('myForm');
+
+        let stringifiedIncorrectAnswers = JSON.stringify(UserAnswer);
+        form.querySelector('input[name="correctAnswers"]').value = stringifiedIncorrectAnswers;
+        form.querySelector('input[name="incorrectAnswers"]').value = UserAnswer;
+
+        form.submit();
+    }
     showQuestion();
+
 
 </Script>

@@ -26,7 +26,7 @@ Route::prefix("test")->group(function (){
     Route::get("",[TestController::class,"index"])->name("index");
 
     Route::get("/ticket/{ticketId}",[TestController::class,"ticket"])->name("ticket");
-    Route::post("/ticket/{ticketId}",[TestController::class,"ticketStore"])->name("ticketStore");
+    Route::post("/ticket/",[TestController::class,"ticketStore"])->name("ticketStore");
 
     Route::get("/topic/{topicId}",[TestController::class,"topic"])->name("topic");
     Route::get("/exam",[TestController::class,"exam"])->name("exam");

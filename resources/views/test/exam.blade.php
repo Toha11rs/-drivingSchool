@@ -27,4 +27,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @include("BladeJs.ExamJS")
+
+<form id="myForm" action="{{route("ticketStore")}}" method="post">
+    @csrf
+    <input type="hidden" name="correctAnswers" >
+    <input type="hidden" name="incorrectAnswers" >
+
+    <input>
 @endsection
