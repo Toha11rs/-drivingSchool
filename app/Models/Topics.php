@@ -13,7 +13,7 @@ class Topics extends Model
 
     public function topics()
     {
-        return $this->hasMany(Topics::class, 'topics_id');
+        return $this->hasMany(Questions::class, 'topics_id');
     }
 
     public $timestamps = false;

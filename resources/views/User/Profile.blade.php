@@ -12,11 +12,11 @@
 </header>
 <main>
     <section class="statistics">
-        <h2>Статистика</h2>
-        {{-- @foreach($statisticsArray as $item)
-            {{dd($statisticsArray)}}
+        <h2>Статистика11</h2>
+     @foreach($presentTicket as $item)
+            {{dd($item)}}
+        @endforeach
 
-        @endforeach --}}
         <div class="stat-block">
             <p>Tests Taken: <span class="stat-value">10</span></p>
         </div>

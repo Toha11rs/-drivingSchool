@@ -18,6 +18,10 @@ class Statistics extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function questions()
+    {
+        return $this->belongsTo(Questions::class, 'question_id');
+    }
 
     use HasFactory;
 }
