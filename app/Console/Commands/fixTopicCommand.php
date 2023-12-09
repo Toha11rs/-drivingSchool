@@ -25,6 +25,7 @@ class fixTopicCommand extends Command
     /**
      * Execute the console command.
      */
+    ////КОМАНДА ОБНОВЛЕНИЯ ТОПИКА
     public function handle()
     {
         for ($i = 1; $i <= 26; $i++) {
