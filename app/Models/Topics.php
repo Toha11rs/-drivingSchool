@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topics extends Model
 {
-    protected $fillable = ["topic"];
+    protected $fillable = [
+        "topic",
+        "count_questions",
+        ];
 
 
 
