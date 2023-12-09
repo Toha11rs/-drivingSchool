@@ -19,20 +19,16 @@ class UserController extends Controller
         $c = 0;
         $ic = 0;
 
-        foreach ($statistics as $item) {
-            if ($item->type == "ticket") {
-                $item->is_correct == 1 ? $c++ : $ic++;
-                $statisticsArray["ticket"] = [
-                    "correct" => $c,
-                    "incorrect" => $ic,
-                    "allAnswers" =>$c+$ic,
-                ];
-            }
 
-
-        }
 //        dd($statisticsArray);
-        return view("User.Profile", compact("user", "statisticsArray"));
+        return view("User.Profile", compact(
+            "user",
+            "statisticsArray",
+            "allCorrect",
+            "IncorrectTicket",
+            "correctTicket",
+            "statistics"
+        ));
     }
 }
 //$statisticsArray["ticket"] = [

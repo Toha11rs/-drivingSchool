@@ -13,10 +13,10 @@
 <main>
     <section class="statistics">
         <h2>Статистика</h2>
-        @foreach($statisticsArray as $item)
-            {{dd($statisticsArray)}}
+{{--        @foreach($statisticsArray as $item)--}}
+            {{dd($allCorrect)}}
 
-        @endforeach
+{{--        @endforeach--}}
         <div class="stat-block">
             <p>Tests Taken: <span class="stat-value">10</span></p>
         </div>
