@@ -12,26 +12,11 @@
 </header>
 <main>
     <section class="statistics">
-        <h2>Статистика11</h2>
-     @foreach($presentTicket as $item)
-            {{dd($item)}}
-        @endforeach
-
-        <div class="stat-block">
-            <p>Tests Taken: <span class="stat-value">10</span></p>
-        </div>
-        <div class="stat-block">
-            <p>Correct Answers: <span class="stat-value">8</span></p>
-        </div>
-        <div class="stat-block">
-            <p>Incorrect Answers: <span class="stat-value">2</span></p>
-        </div>
-
+        <h2>Статистика</h2>
+@include("User.Components.StatisticInfo")
     </section>
 </main>
-<footer>
-    <p>© 2023 YourAutoSchool. All rights reserved.</p>
-</footer>
+
 </body>
 </html>
 <Style>
