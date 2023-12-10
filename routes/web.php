@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\AuthController;
@@ -7,35 +8,31 @@ use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\mainController;
 
 
-use \App\Models\Questions;
-use \App\Models\Answers;
-use \App\Models\Topics;
+Route::get("/", [mainController::class, "main"])->name("main");
 
-Route::get("/", [mainController::class,"main"])->name("main");
+Route::get("/register", [AuthController::class, "create"])->name("register");
+Route::post("/register", [AuthController::class, "store"])->name("register");
 
-Route::get("/register",[AuthController::class,"create"])->name("register");
-Route::post("/register",[AuthController::class,"store"])->name("register");
+Route::get("/login", [AuthController::class, "createLogin"])->name("login");
+Route::post("/login", [AuthController::class, "storeLogin"]);
 
-Route::get("/login",[AuthController::class,"createLogin"])->name("login");
-Route::post("/login",[AuthController::class,"storeLogin"]);
-
-
-Route::get("/profile",[UserController::class,"index"])->name("Profile")->middleware('auth');;
-
-Route::prefix("test")->group(function (){
-    Route::get("",[TestController::class,"index"])->name("index");
-
-    Route::get("/ticket/{ticketId}",[TestController::class,"ticket"])->name("ticket");
-    Route::post("/ticket/",[TestController::class,"ticketStore"])->name("ticketStore");
-
-    Route::get("/topic/{topicId}",[TestController::class,"topic"])->name("topic");
-    Route::get("/exam",[TestController::class,"exam"])->name("exam");
-
-
+Route::prefix("profile")->group(function () {
+    Route::get("", [UserController::class, "index"])->name("profile")->middleware('auth');
+    Route::get("driving", [UserController::class, "driving"])->name("driving")->middleware('auth');
 });
 
 
+Route::prefix("test")->group(function () {
+    Route::get("", [TestController::class, "index"])->name("index");
 
+    Route::get("/ticket/{ticketId}", [TestController::class, "ticket"])->name("ticket");
+    Route::post("/ticket/", [TestController::class, "ticketStore"])->name("ticketStore");
+
+    Route::get("/topic/{topicId}", [TestController::class, "topic"])->name("topic");
+    Route::get("/exam", [TestController::class, "exam"])->name("exam");
+
+
+});
 
 
 //Route::get('test1', function () {
@@ -52,16 +49,6 @@ Route::prefix("test")->group(function (){
 //    dd($missingIds);
 
 Route::get('test1', function () {
-    $answers = Questions::all();
-
-   foreach ($answers as $answer){
-       $img = $answer->image;
-       $update = substr($img, 1);
-       $answer->update([
-          "image"=>$update
-       ]);
-   }
-
 });
 
 

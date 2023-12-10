@@ -17,6 +17,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Statistics::class, 'user_id');
     }
+
+
+
     /**
      * The attributes that are mass assignable.
      *
