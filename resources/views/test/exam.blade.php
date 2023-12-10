@@ -28,10 +28,4 @@
 
 @include("BladeJs.ExamJS")
 
-<form id="myForm" action="{{route("ticketStore")}}" method="post">
-    @csrf
-    <input type="hidden" name="correctAnswers" >
-    <input type="hidden" name="incorrectAnswers" >
-
-    <input>
 @endsection

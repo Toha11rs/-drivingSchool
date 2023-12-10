@@ -9,6 +9,7 @@ use App\Models\Topics;
 use App\Services\UserServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
@@ -32,22 +33,11 @@ class TestController extends Controller
         return view("test.ticket");
     }
 
-    public function ticketStore(Request $request)
+    public function ticketStore(Request $request,UserServices $userServices)
     {
-
-        $incorrectAnswers = $request->input('correctAnswers');
-        $result = json_decode($incorrectAnswers);
         $user = Auth::user();
-        foreach ($result as $answer){
+        $userServices->SaveTestResult($request,$user);
 
-            Statistics::create([
-               "user_id"=>$user->id,
-               "question_id" => $answer->question_id,
-                "is_correct"=>$answer->is_correct,
-                "type"=>$answer->type,
-
-            ]);
-        }
         return redirect()->back();
     }
 

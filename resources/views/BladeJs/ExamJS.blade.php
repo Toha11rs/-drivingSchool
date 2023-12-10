@@ -123,12 +123,11 @@
                 });
                 $('.question li.selected').addClass('incorrect');
 
-                if (incorrectAnswers.length === 1) { // Если это первая ошибка пользователя
-                    loadRandomQuestions(); // Загружаем 5 новых вопросов
-                } else if (incorrectAnswers.length === 2) { // Если это вторая ошибка пользователя
-                    loadRandomQuestions(); // Загружаем еще 5 новых вопросов
+                if (incorrectAnswers.length === 1) {
+                    loadRandomQuestions();
+                } else if (incorrectAnswers.length === 2) {
+                    loadRandomQuestions();
                 }
-                console.log(errorCount);
                 if (currentQuestionIndex == 19 && errorCount <= 1) {
 
                     fakeQuestions = 25;
@@ -139,7 +138,6 @@
 
                 else if (currentQuestionIndex === questions.length - 1) { // Если это последний вопрос
                     showFinalResult(); // Показываем итоговый результат
-                    submitFormWithAnswers();
                 }
             }
         }
@@ -164,17 +162,6 @@
             resultContainer.show();
         }
         initializeQuiz();
-
-        function submitFormWithAnswers(UserAnswer) {
-
-            const form = document.getElementById('myForm');
-
-            let stringifiedIncorrectAnswers = JSON.stringify(UserAnswer);
-            form.querySelector('input[name="correctAnswers"]').value = stringifiedIncorrectAnswers;
-            form.querySelector('input[name="incorrectAnswers"]').value = UserAnswer;
-
-            form.submit();
-        }
 
     });
 
