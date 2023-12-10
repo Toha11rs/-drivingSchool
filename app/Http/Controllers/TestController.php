@@ -33,53 +33,10 @@ class TestController extends Controller
         return view("test.ticket");
     }
 
-    public function ticketStore(Request $request)
+    public function ticketStore(Request $request,UserServices $userServices)
     {
-
-        $incorrectAnswers = $request->input('correctAnswers');
-        $result = json_decode($incorrectAnswers);
         $user = Auth::user();
-        $type = $result[0]->type;
-        $userTopicStatistics = Statistics::where("user_id", $user->id)->where("type", "ticket")->first();
-
-        if ($type == "ticket") {
-            if (!$userTopicStatistics) {
-
-                foreach ($result as $answer) {
-                    Statistics::create([
-                        "user_id" => $user->id,
-                        "question_id" => $answer->question_id,
-                        "is_correct" => $answer->is_correct,
-                        "type" => $answer->type,
-                    ]);
-                }
-            } else {
-                DB::table("statistics")->where("user_id", $user->id)->update([
-                    "is_correct" => $result[0]->is_correct,
-                ]);
-            }
-        } elseif ($type == "topic") {
-            foreach ($result as $answer) {
-                $userTopicStatistics = Statistics::where("question_id", $answer->question_id)->where("type", "topic")->first();
-                if (!$userTopicStatistics) {
-
-                    Statistics::create([
-                        "user_id" => $user->id,
-                        "question_id" => $answer->question_id,
-                        "is_correct" => $answer->is_correct,
-                        "type" => $answer->type,
-                    ]);
-                }
-                else{
-                    DB::table("statistics")->where("question_id", $answer->question_id)
-                        ->where("type", "topic")
-                        ->update([
-                        "is_correct" => $result[0]->is_correct,
-                    ]);
-                }
-            }
-        }
-
+        $userServices->SaveTestResult($request,$user);
 
         return redirect()->back();
     }
