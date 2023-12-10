@@ -64,7 +64,7 @@ class UserServices
                     $color_exam[$i] = "red";
                 }
             } else {
-                $color_exam[$i] = "gray";
+                $color_exam[$i] = "#bbbbbb";
             }
         }
         return $color_exam;

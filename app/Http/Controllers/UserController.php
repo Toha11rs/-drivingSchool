@@ -15,16 +15,10 @@ class UserController extends Controller
         $presentTicket = $userServices->getPresentStatistic($user);
 
 
-//        dd($presentTicket);
+
         return view("User.Profile", compact(
             "presentTicket",
             "user",
         ));
     }
 }
-//$statisticsArray["ticket"] = [
-//    "correct"=>count($correctTicket),
-//    "incorrect"=>count($IncorrectTicket),
-//    "allCorrect"=>count($allCorrect)
-//
-//];
