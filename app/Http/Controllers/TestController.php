@@ -9,6 +9,7 @@ use App\Models\Topics;
 use App\Services\UserServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
@@ -38,16 +39,48 @@ class TestController extends Controller
         $incorrectAnswers = $request->input('correctAnswers');
         $result = json_decode($incorrectAnswers);
         $user = Auth::user();
-        foreach ($result as $answer){
+        $type = $result[0]->type;
+        $userTopicStatistics = Statistics::where("user_id", $user->id)->where("type", "ticket")->first();
 
-            Statistics::create([
-               "user_id"=>$user->id,
-               "question_id" => $answer->question_id,
-                "is_correct"=>$answer->is_correct,
-                "type"=>$answer->type,
+        if ($type == "ticket") {
+            if (!$userTopicStatistics) {
 
-            ]);
+                foreach ($result as $answer) {
+                    Statistics::create([
+                        "user_id" => $user->id,
+                        "question_id" => $answer->question_id,
+                        "is_correct" => $answer->is_correct,
+                        "type" => $answer->type,
+                    ]);
+                }
+            } else {
+                DB::table("statistics")->where("user_id", $user->id)->update([
+                    "is_correct" => $result[0]->is_correct,
+                ]);
+            }
+        } elseif ($type == "topic") {
+            foreach ($result as $answer) {
+                $userTopicStatistics = Statistics::where("question_id", $answer->question_id)->where("type", "topic")->first();
+                if (!$userTopicStatistics) {
+
+                    Statistics::create([
+                        "user_id" => $user->id,
+                        "question_id" => $answer->question_id,
+                        "is_correct" => $answer->is_correct,
+                        "type" => $answer->type,
+                    ]);
+                }
+                else{
+                    DB::table("statistics")->where("question_id", $answer->question_id)
+                        ->where("type", "topic")
+                        ->update([
+                        "is_correct" => $result[0]->is_correct,
+                    ]);
+                }
+            }
         }
+
+
         return redirect()->back();
     }
 

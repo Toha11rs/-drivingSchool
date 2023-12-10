@@ -17,7 +17,7 @@ class UserServices
         $result = [];
 
 
-        $statistics = Statistics::where('user_id', $userId)->where("type","ticket")->with('questions.topics')->get();
+        $statistics = Statistics::where('user_id', $userId)->where("type","topic")->with('questions.topics')->get();
 
         foreach ($topics as $topic) {
             $topicName = $topic->topic;
@@ -50,11 +50,11 @@ class UserServices
     }
 
     public function GetColorUser($user){
-
         $color_exam = [];
         for ($i = 1; $i < 41; $i++) {
             $colorUser = Statistics::where("user_id", $user->id)
                 ->where("question_id", $i)
+                ->where("type","ticket")
                 ->pluck("is_correct")
                 ->first();
             if(isset($colorUser)){

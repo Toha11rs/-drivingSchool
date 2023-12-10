@@ -7,29 +7,16 @@
     let selectedAnswer = null;
     let answeredQuestions = new Array(questions.length).fill(false);
     let UserAnswer = [];
-
-
     function showQuestion() {
         if (currentQuestionIndex < questions.length) {
             let currentQuestion = questions[currentQuestionIndex];
-            let imageElement = document.getElementById('question-image');
             let questionElement = document.getElementById('question');
             let optionsList = document.getElementById('options');
             let counterElement = document.getElementById('counter');
 
-            if (currentQuestion.image) {
-                // Если есть, показываем изображение, устанавливаем путь к картинке в атрибут src
-                imageElement.style.display = 'block'; // Показываем изображение
-                imageElement.src = currentQuestion.image; // Устанавливаем путь к изображению
-            } else {
-                // Если изображения нет, скрываем элемент img
-                imageElement.style.display = 'none';
-            }
-
             questionElement.textContent = currentQuestion.question;
             optionsList.innerHTML = '';
             counterElement.textContent = `Вопрос ${currentQuestionIndex + 1} из ${questions.length}`;
-
 
             currentQuestion.answers.forEach(function (answer) {
                 let li = document.createElement('li');
@@ -43,7 +30,7 @@
                         selectedAnswer.classList.add('selected');
                         answerButton.style.display = 'block';
 
-
+                        // Устанавливаем свойство selected для выбранного ответа
                         currentQuestion.answers.forEach(answer => {
                             answer.selected = false;
                             if (answer.answer === li.textContent) {
@@ -58,6 +45,8 @@
             nextButton.style.display = 'none';
         } else {
             resultText.textContent = 'Тест завершен!';
+            console.log(UserAnswer);
+            submitFormWithAnswers(UserAnswer);
             document.getElementById('quiz').innerHTML = '';
         }
 
@@ -71,9 +60,21 @@
         if (isCorrect) {
             resultText.textContent = 'Правильно!';
             selectedAnswer.classList.add('correct');
+
+            UserAnswer.push({
+                is_correct:true,
+                question_id: questions[currentQuestionIndex].id,
+                type:"topic"
+            });
         } else {
             resultText.textContent = 'Неправильно.';
             selectedAnswer.classList.add('incorrect');
+
+            UserAnswer.push({
+                is_correct:false,
+                question_id: questions[currentQuestionIndex].id,
+                type:"topic"
+            });
         }
 
         answerTipElement.textContent = answerTip; // Отображаем объяснение
@@ -93,7 +94,6 @@
             if (answered) {
                 let question = questions[index];
                 let selectedAnswer = question.answers.find(answer => answer.selected);
-                console.log(selectedAnswer);
                 if (selectedAnswer) {
                     if (selectedAnswer.is_correct) {
                         square.classList.add('correct');
@@ -122,17 +122,16 @@
         resultText.textContent = '';
     });
 
+    showQuestion();
+
+
     function submitFormWithAnswers(UserAnswer) {
 
         const form = document.getElementById('myForm');
 
-        let stringifiedIncorrectAnswers = JSON.stringify(UserAnswer);
-        form.querySelector('input[name="correctAnswers"]').value = stringifiedIncorrectAnswers;
-        form.querySelector('input[name="incorrectAnswers"]').value = UserAnswer;
-
+        let StringIncorrectAnswers = JSON.stringify(UserAnswer);
+        console.log(StringIncorrectAnswers)
+        form.querySelector('input[name="correctAnswers"]').value = StringIncorrectAnswers;
         form.submit();
     }
-    showQuestion();
-
-
 </Script>
