@@ -9,20 +9,19 @@ use \App\Http\Controllers\mainController;
 
 
 Route::get("/", [mainController::class, "main"])->name("main");
-
 Route::get("/register", [AuthController::class, "create"])->name("register");
 Route::post("/register", [AuthController::class, "store"])->name("register");
-
 Route::get("/login", [AuthController::class, "createLogin"])->name("login");
 Route::post("/login", [AuthController::class, "storeLogin"]);
 
-Route::prefix("profile")->group(function () {
-    Route::get("", [UserController::class, "index"])->name("profile")->middleware('auth');
-    Route::get("driving", [UserController::class, "driving"])->name("driving")->middleware('auth');
+Route::prefix("profile")->middleware('auth')->group(function () {
+    Route::get("", [UserController::class, "index"])->name("profile");
+    Route::get("driving", [UserController::class, "driving"])->name("driving");
+    Route::get("theory", [UserController::class, "theory"])->name("theory");
+    Route::get("pdd", [UserController::class, "pdd"])->name("pdd");
 });
 
-
-Route::prefix("test")->group(function () {
+Route::prefix("test")->middleware('auth')->group(function () {
     Route::get("", [TestController::class, "index"])->name("index");
 
     Route::get("/ticket/{ticketId}", [TestController::class, "ticket"])->name("ticket");
@@ -30,10 +29,9 @@ Route::prefix("test")->group(function () {
 
     Route::get("/topic/{topicId}", [TestController::class, "topic"])->name("topic");
     Route::get("/exam", [TestController::class, "exam"])->name("exam");
-
-
 });
 
+Route::get("AdminProfile",[InstrucorController::class,"index"])->name("index");
 
 //Route::get('test1', function () {
 //    $answers = Answers::pluck('question_id')->unique()->sort();

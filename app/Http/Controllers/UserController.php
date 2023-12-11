@@ -27,4 +27,12 @@ class UserController extends Controller
 
         return view("User.Driving");
     }
+
+    public function theory(){
+        return view("User.Theory");
+    }
+
+    public function pdd(){
+        return view("User.Pdd");
+    }
 }
