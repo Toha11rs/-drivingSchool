@@ -15,6 +15,7 @@ class UserController extends Controller
         $presentTicket = $userServices->getPresentStatistic($user);
 
 
+
         return view("User.Profile", compact(
             "presentTicket",
             "user",
@@ -27,4 +28,3 @@ class UserController extends Controller
         return view("User.Driving");
     }
 }
-
