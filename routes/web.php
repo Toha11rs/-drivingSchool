@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\InstructorController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\mainController;
 
@@ -19,6 +20,8 @@ Route::post("/login", [AuthController::class, "storeLogin"]);
 Route::prefix("profile")->group(function () {
     Route::get("", [UserController::class, "index"])->name("profile")->middleware('auth');
     Route::get("driving", [UserController::class, "driving"])->name("driving")->middleware('auth');
+
+    Route::get("", [InstructorController::class, "index"])->name("instructor")->middleware('auth');
 });
 
 
