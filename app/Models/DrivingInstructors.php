@@ -19,9 +19,9 @@ class DrivingInstructors extends Model
     ];
 
 
-    public function driving_car()
+    public function drivingCar()
     {
-        return $this->hasMany(CarInstructors::class, 'car_id');
+        return $this->belongsTo(CarInstructors::class,"car_id");
     }
     use HasFactory;
 }

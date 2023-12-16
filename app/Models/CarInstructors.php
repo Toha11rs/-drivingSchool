@@ -16,4 +16,10 @@ class CarInstructors extends Model
 
     ];
     use HasFactory;
+
+
+    public function instructor()
+    {
+        return $this->hasOne(DrivingInstructors::class);
+    }
 }
