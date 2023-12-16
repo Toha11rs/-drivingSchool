@@ -23,10 +23,10 @@
         <div class="col-md-4">
             <div class="profile-block">
                 <h3>Запись на урок вождения</h3>
+
                 @foreach($instructors as $instructor)
-               <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}" class="instructor-link"
-                            data-toggle="modal" data-target="#instructorModal">{{$instructor->name}}</a>
-                    <br>
+                    <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}">{{$instructor->name}}</a>
+                     <br>
                 @endforeach
             </div>
         </div>
@@ -44,7 +44,38 @@
         </div>
     </div>
 </div>
-@include('Instructor.modal.InstructorInfo')
+<script>
+    let modal = document.getElementById('myModal');
+    let closeButton = document.getElementsByClassName('close')[0];
+    let instructorInfo = document.getElementById('instructorInfo');
+
+    function loadInstructorModal(instructorId) {
+        // AJAX запрос для загрузки данных об инструкторе
+        fetch(`{{ route("instructorModal") }}?instructorId=${instructorId}`)
+            .then(response => response.text())
+            .then(data => {
+                // Отображение информации об инструкторе в модальном окне
+                instructorInfo.innerHTML = data;
+                modal.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+    }
+
+    // Закрытие модального окна при клике на крестик
+    closeButton.onclick = function() {
+        modal.style.display = 'none';
+    };
+
+    // Закрытие модального окна при клике за его пределами
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
