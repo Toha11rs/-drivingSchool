@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\InstructorController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\mainController;
 
@@ -16,9 +17,12 @@ Route::post("/login", [AuthController::class, "storeLogin"]);
 
 Route::prefix("profile")->middleware('auth')->group(function () {
     Route::get("", [UserController::class, "index"])->name("profile");
-    Route::get("driving", [UserController::class, "driving"])->name("driving");
     Route::get("theory", [UserController::class, "theory"])->name("theory");
     Route::get("pdd", [UserController::class, "pdd"])->name("pdd");
+
+    Route::get("driving", [InstructorController::class, "index"])->name("driving");
+    Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
+
 });
 
 Route::prefix("test")->middleware('auth')->group(function () {
@@ -31,7 +35,7 @@ Route::prefix("test")->middleware('auth')->group(function () {
     Route::get("/exam", [TestController::class, "exam"])->name("exam");
 });
 
-Route::get("AdminProfile",[InstrucorController::class,"index"])->name("index");
+//Route::get("AdminProfile",[InstrucorController::class,"index"])->name("index");
 
 //Route::get('test1', function () {
 //    $answers = Answers::pluck('question_id')->unique()->sort();
