@@ -166,10 +166,10 @@
                         $('#successMessage').text('Вы успешно записались на урок на время: ' + selectedDateTime);
                         $('#successMessage').show(); // Показываем сообщение
                         $('#lessonTime').text(selectedDateTime); // Выводим выбранное время в сообщении
-                        $('#bookingForm').hide(); // Скрываем форму выбора времени
-                        $('#selectedDate').hide(); // Скрываем форму выбора времени
-                        $('#timeSlots').hide(); // Скрываем форму выбора времени
-                        $('#instructorModal').hide(); // Скрываем форму выбора времени
+                        $('#bookingForm').hide();
+                        $('#selectedDate').hide();
+                        $('#timeSlots').hide();
+                        $('#instructorModal').hide();
                     })
                     .catch(function(error) {
                         console.error('Ошибка:', error);

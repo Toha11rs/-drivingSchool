@@ -1,3 +1,9 @@
+<h3>Запись на урок вождения</h3>
+@foreach($instructors as $instructor)
+    <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}" class="instructor-modal-open">{{$instructor->name}}</a>
+    <br>
+@endforeach
+
 <div class="modal" id="instructorModal">
 </div>
 <Style>
@@ -50,3 +56,26 @@
         z-index: 9998; /* Устанавливаем под модальное окно, но поверх остальных элементов */
     }
 </Style>
+<script>
+    $(document).ready(function() {
+        $('.instructor-modal-open').click(function(e) {
+            e.preventDefault();
+
+            var instructorPageUrl = $(this).attr('href');
+
+            // Загрузка содержимого страницы инструктора в модальное окно
+            $('#instructorModal').load(instructorPageUrl, function() {
+                // По завершении загрузки отображаем модальное окно
+                $('#instructorModal').show();
+            });
+        });
+
+        // Закрытие модального окна при клике на него или за его пределами
+        $(document).on('click', function(e) {
+            if ($(e.target).closest('#instructorModal').length === 0) {
+                $('#instructorModal').hide();
+            }
+        });
+    });
+
+</script>

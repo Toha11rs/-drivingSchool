@@ -24,55 +24,23 @@
 
         <div class="col-md-4">
             <div class="profile-block">
-                <h3>Запись на урок вождения</h3>
-
-            @foreach($instructors as $instructor)
-                <!-- Добавьте класс 'instructor-modal-open' к ссылке -->
-                    <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}" class="instructor-modal-open">{{$instructor->name}}</a>
-                    <br>
-            @endforeach
-
-        @include("Instructor.modal.mainModal")
+                @include("Instructor.modal.InstructorModal")
 
             </div>
         </div>
         <div class="col-md-4">
             <div class="profile-block">
-                <h3>Ближайший урок вождения</h3>
-                <p>Информация о следующем уроке вождения: дата, время, место проведения и прочее.</p>
+                @include("Instructor.components.NearLessons")
             </div>
         </div>
         <div class="col-md-4">
             <div class="profile-block">
-                <h3>Оцените предыдущий урок вождения</h3>
-                <p>Здесь может быть форма для оценки или ссылка на оставление отзыва о последнем уроке вождения.</p>
+                @include("Instructor.components.GradeLesson")
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-        $('.instructor-modal-open').click(function(e) {
-            e.preventDefault();
 
-            var instructorPageUrl = $(this).attr('href');
-
-            // Загрузка содержимого страницы инструктора в модальное окно
-            $('#instructorModal').load(instructorPageUrl, function() {
-                // По завершении загрузки отображаем модальное окно
-                $('#instructorModal').show();
-            });
-        });
-
-        // Закрытие модального окна при клике на него или за его пределами
-        $(document).on('click', function(e) {
-            if ($(e.target).closest('#instructorModal').length === 0) {
-                $('#instructorModal').hide();
-            }
-        });
-    });
-
-</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
