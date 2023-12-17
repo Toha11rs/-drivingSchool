@@ -53,7 +53,6 @@
 <script>
     $(document).ready(function() {
         $('.instructor-modal-open').click(function(e) {
-            console.log("123")
             e.preventDefault();
 
             var instructorPageUrl = $(this).attr('href');
