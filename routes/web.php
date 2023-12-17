@@ -22,6 +22,7 @@ Route::prefix("profile")->middleware('auth')->group(function () {
 
     Route::get("driving", [InstructorController::class, "index"])->name("driving");
     Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
+    Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore");
 
 });
 

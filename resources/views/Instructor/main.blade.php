@@ -49,31 +49,31 @@
     let closeButton = document.getElementsByClassName('close')[0];
     let instructorInfo = document.getElementById('instructorInfo');
 
-    function loadInstructorModal(instructorId) {
-        // AJAX запрос для загрузки данных об инструкторе
-        fetch(`{{ route("instructorModal") }}?instructorId=${instructorId}`)
-            .then(response => response.text())
-            .then(data => {
-                // Отображение информации об инструкторе в модальном окне
-                instructorInfo.innerHTML = data;
-                modal.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-            });
-    }
+{{--    function loadInstructorModal(instructorId) {--}}
+{{--        // AJAX запрос для загрузки данных об инструкторе--}}
+{{--        fetch(`{{ route("instructorModal") }}?instructorId=${instructorId}`)--}}
+{{--            .then(response => response.text())--}}
+{{--            .then(data => {--}}
+{{--                // Отображение информации об инструкторе в модальном окне--}}
+{{--                instructorInfo.innerHTML = data;--}}
+{{--                modal.style.display = 'block';--}}
+{{--            })--}}
+{{--            .catch(error => {--}}
+{{--                console.error('Ошибка:', error);--}}
+{{--            });--}}
+{{--    }--}}
 
-    // Закрытие модального окна при клике на крестик
-    closeButton.onclick = function() {
-        modal.style.display = 'none';
-    };
+{{--    // Закрытие модального окна при клике на крестик--}}
+{{--    closeButton.onclick = function() {--}}
+{{--        modal.style.display = 'none';--}}
+{{--    };--}}
 
-    // Закрытие модального окна при клике за его пределами
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    };
+{{--    // Закрытие модального окна при клике за его пределами--}}
+{{--    window.onclick = function(event) {--}}
+{{--        if (event.target === modal) {--}}
+{{--            modal.style.display = 'none';--}}
+{{--        }--}}
+{{--    };--}}
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

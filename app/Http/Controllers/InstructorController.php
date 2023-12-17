@@ -20,4 +20,8 @@ class InstructorController extends Controller
             "instructor"=>$instructor
         ]);
     }
+
+    public function instructorModalStore(Request $request){
+
+    }
 }
