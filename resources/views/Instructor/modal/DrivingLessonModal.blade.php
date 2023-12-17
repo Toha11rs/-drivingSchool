@@ -17,6 +17,46 @@
 
 <div class="modal" id="DrivingLessonModal">
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.lesson-modal-open').click(function(e) {
+            e.preventDefault();
+
+            var instructorPageUrl = $(this).attr('href');
+
+            // Загрузка содержимого страницы инструктора в модальное окно
+            $('#DrivingLessonModal').load(instructorPageUrl, function() {
+                // По завершении загрузки отображаем модальное окно
+                $('#DrivingLessonModal').show();
+            });
+        });
+
+        // Закрытие модального окна при клике на него или за его пределами
+        $(document).on('click', function(e) {
+            if ($(e.target).closest('#DrivingLessonModal').length === 0) {
+                $('#DrivingLessonModal').hide();
+            }
+        });
+        $('#showAllDates').on('click', function() {
+            $('#allDates').show(); // Показать все даты при клике на кнопку
+        });
+
+
+        $('#showAllDates').on('click', function() {
+            $('#firstThreeDates').hide(); // Скрыть первые три записи
+            $('#allDates').show(); // Показать все записи
+        });
+
+        $('#hideAllDates').on('click', function() {
+            $('#allDates').hide(); // Скрыть все записи
+            $('#firstThreeDates').show(); // Показать первые три записи
+        });
+    });
+
+
+
+</script>
 <Style>
 
 
@@ -67,42 +107,3 @@
         z-index: 9998; /* Устанавливаем под модальное окно, но поверх остальных элементов */
     }
 </Style>
-<script>
-    $(document).ready(function() {
-        $('.lesson-modal-open').click(function(e) {
-            e.preventDefault();
-
-            var instructorPageUrl = $(this).attr('href');
-
-            // Загрузка содержимого страницы инструктора в модальное окно
-            $('#DrivingLessonModal').load(instructorPageUrl, function() {
-                // По завершении загрузки отображаем модальное окно
-                $('#DrivingLessonModal').show();
-            });
-        });
-
-        // Закрытие модального окна при клике на него или за его пределами
-        $(document).on('click', function(e) {
-            if ($(e.target).closest('#DrivingLessonModal').length === 0) {
-                $('#DrivingLessonModal').hide();
-            }
-        });
-        $('#showAllDates').on('click', function() {
-            $('#allDates').show(); // Показать все даты при клике на кнопку
-        });
-
-
-        $('#showAllDates').on('click', function() {
-            $('#firstThreeDates').hide(); // Скрыть первые три записи
-            $('#allDates').show(); // Показать все записи
-        });
-
-        $('#hideAllDates').on('click', function() {
-            $('#allDates').hide(); // Скрыть все записи
-            $('#firstThreeDates').show(); // Показать первые три записи
-        });
-    });
-
-
-
-</script>

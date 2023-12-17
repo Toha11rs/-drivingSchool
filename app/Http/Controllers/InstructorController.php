@@ -12,21 +12,32 @@ class InstructorController extends Controller
 {
     public function index()
     {
+        $current_time = now();
         $user = Auth::user();
+        $instructors = DrivingInstructors::all();
+
         $lessons = DrivingLessons::with('instructor')
             ->where('user_id', $user->id)
             ->orderByDesc("start_time")
+            ->where('done',0)
             ->get();
 
         $nearLesson = DrivingLessons::with('instructor')
             ->where('user_id', $user->id)
+            ->where('done',0)
+            ->orderByDesc("start_time")
             ->first();
+
+
 
         $lessonsGrade = DrivingLessons::with('instructor')
             ->where('user_id', $user->id)
-            ->where('assessment', 0)->get();
+            ->where('assessment', 0)
+            ->where('start_time', '<', $current_time)
+            ->orderBy('start_time', 'DESC')
+            ->get();
 
-        $instructors = DrivingInstructors::all();
+
 
         return view("Instructor.main", [
             "lessons" => $lessons,
@@ -81,10 +92,10 @@ class InstructorController extends Controller
     {
 
         $rating = $request->input('rating');
-//        dd($rating);
         $lessonId = $request->input('LessonId');
         DrivingLessons::where("id", $lessonId)->update([
-            "assessment" => $rating
+            "assessment" => (int)$rating,
+            "done"=>1
         ]);
         return redirect()->back();
     }
