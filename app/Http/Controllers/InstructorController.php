@@ -22,6 +22,8 @@ class InstructorController extends Controller
     }
 
     public function instructorModalStore(Request $request){
-
+        $date = $request->input('calendar');
+        var_dump($date); // Выведет информацию о содержимом переменной $date
+        die();
     }
 }

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профиль ученика</title>
@@ -16,7 +18,7 @@
     </style>
 </head>
 <body>
-<div class="container mt-4">
+<div class="container mt-4 ">
     <h1 class="mb-4">Профиль ученика</h1>
     <div class="row">
 
@@ -24,10 +26,14 @@
             <div class="profile-block">
                 <h3>Запись на урок вождения</h3>
 
-                @foreach($instructors as $instructor)
-                    <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}">{{$instructor->name}}</a>
-                     <br>
-                @endforeach
+            @foreach($instructors as $instructor)
+                <!-- Добавьте класс 'instructor-modal-open' к ссылке -->
+                    <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}" class="instructor-modal-open">{{$instructor->name}}</a>
+                    <br>
+            @endforeach
+
+        @include("Instructor.modal.mainModal")
+
             </div>
         </div>
         <div class="col-md-4">
@@ -45,35 +51,28 @@
     </div>
 </div>
 <script>
-    let modal = document.getElementById('myModal');
-    let closeButton = document.getElementsByClassName('close')[0];
-    let instructorInfo = document.getElementById('instructorInfo');
+    $(document).ready(function() {
+        $('.instructor-modal-open').click(function(e) {
+            console.log("123")
+            e.preventDefault();
 
-{{--    function loadInstructorModal(instructorId) {--}}
-{{--        // AJAX запрос для загрузки данных об инструкторе--}}
-{{--        fetch(`{{ route("instructorModal") }}?instructorId=${instructorId}`)--}}
-{{--            .then(response => response.text())--}}
-{{--            .then(data => {--}}
-{{--                // Отображение информации об инструкторе в модальном окне--}}
-{{--                instructorInfo.innerHTML = data;--}}
-{{--                modal.style.display = 'block';--}}
-{{--            })--}}
-{{--            .catch(error => {--}}
-{{--                console.error('Ошибка:', error);--}}
-{{--            });--}}
-{{--    }--}}
+            var instructorPageUrl = $(this).attr('href');
 
-{{--    // Закрытие модального окна при клике на крестик--}}
-{{--    closeButton.onclick = function() {--}}
-{{--        modal.style.display = 'none';--}}
-{{--    };--}}
+            // Загрузка содержимого страницы инструктора в модальное окно
+            $('#instructorModal').load(instructorPageUrl, function() {
+                // По завершении загрузки отображаем модальное окно
+                $('#instructorModal').show();
+            });
+        });
 
-{{--    // Закрытие модального окна при клике за его пределами--}}
-{{--    window.onclick = function(event) {--}}
-{{--        if (event.target === modal) {--}}
-{{--            modal.style.display = 'none';--}}
-{{--        }--}}
-{{--    };--}}
+        // Закрытие модального окна при клике на него или за его пределами
+        $(document).on('click', function(e) {
+            if ($(e.target).closest('#instructorModal').length === 0) {
+                $('#instructorModal').hide();
+            }
+        });
+    });
+
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

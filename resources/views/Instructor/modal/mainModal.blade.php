@@ -1,66 +1,52 @@
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        @include('Instructor.modal.InstructorInfo')
-    </div>
+<div class="modal" id="instructorModal">
 </div>
+<Style>
 
-<Script>
-    let modal = document.getElementById('myModal');
-    let btn = document.getElementById('openModalBtn');
-    let span = document.getElementsByClassName('close')[0];
-
-    btn.onclick = function() {
-        modal.style.display = 'block';
-    };
-
-    span.onclick = function() {
-        modal.style.display = 'none';
-    };
-
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    };
-</Script>
-
-
-<style>
+    /* Стили для модального окна */
     .modal {
+        display: none; /* По умолчанию скрыто */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        max-width: 80%; /* Максимальная ширина модального окна */
+        max-height: 80%; /* Максимальная высота модального окна */
+        overflow-y: auto; /* Позволяет прокручивать, если контент превышает размеры окна */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
+        z-index: 9999; /* Устанавливаем поверх других элементов */
+    }
+
+    /* Стили для фона (затемнения) вокруг модального окна */
+    .modal-overlay {
         display: none;
         position: fixed;
-        z-index: 1;
-        left: 0;
         top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        /* Добавляем прокрутку к модальному окну */
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный цвет */
+        z-index: 9998; /* Устанавливаем под модальное окно, но поверх остальных элементов */
     }
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%;
-        height: 100rem;
-        max-height: 40rem;
-        overflow: auto;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
+    /* Опциональные стили для кнопки закрытия модального окна */
+    .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
         cursor: pointer;
     }
-</style>
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный цвет */
+        z-index: 9998; /* Устанавливаем под модальное окно, но поверх остальных элементов */
+    }
+</Style>
