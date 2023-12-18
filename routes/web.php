@@ -20,12 +20,17 @@ Route::prefix("profile")->middleware('auth')->group(function () {
     Route::get("theory", [UserController::class, "theory"])->name("theory");
     Route::get("pdd", [UserController::class, "pdd"])->name("pdd");
 
-    Route::get("driving", [InstructorController::class, "index"])->name("driving");
-    Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
-    Route::get("DrivingLessonInfo/{LessonId}", [InstructorController::class, "DrivingLessonModal"])->name("DrivingLessonModal");
-    Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore");
-    Route::post("GradeLesson", [InstructorController::class, "GradeLessonStore"])->name("GradeLessonStore");
+    Route::prefix("driving")->group(function () {
+        Route::get("", [InstructorController::class, "index"])->name("driving");
+        Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
+        Route::get("DrivingLessonInfo/{LessonId}", [InstructorController::class, "DrivingLessonModal"])->name("DrivingLessonModal");
+        Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore");
+        Route::post("GradeLesson", [InstructorController::class, "GradeLessonStore"])->name("GradeLessonStore");
+    });
+    Route::prefix("driving")->group(function () {
+        Route::get("", [TheoryController::class, "index"])->name("driving");
 
+    });
 });
 
 Route::prefix("test")->middleware('auth')->group(function () {

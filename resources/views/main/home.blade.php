@@ -71,16 +71,23 @@
               <div class="account-wrap">
                   <div class="account-item account-item--style2 clearfix js-item-menu">
                       <div class="content">
+                          @if($user)
                           <a class="js-acc-btn" href="#">{{$user->name}} </a>
+                          @else
+                              <a class="js-acc-btn" href="#">Войти </a>
+                          @endif
                       </div>
                       <div class="account-dropdown js-dropdown">
                           <div class="info clearfix">
 
                               <div class="content">
                                   <h5 class="name">
+                                      @if($user)
                                       <a href="#">{{$user->name}}</a>
+                                      @else
+                                          <a href="#">Войти</a>
                                   </h5>
-
+                                  @endif
                               </div>
                           </div>
                           <div class="account-dropdown__body">
