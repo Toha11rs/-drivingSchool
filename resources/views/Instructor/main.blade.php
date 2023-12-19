@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профиль ученика</title>
@@ -16,41 +18,29 @@
     </style>
 </head>
 <body>
-<div class="container mt-4">
+<div class="container mt-4 ">
     <h1 class="mb-4">Профиль ученика</h1>
     <div class="row">
 
         <div class="col-md-4">
             <div class="profile-block">
-                <h3>Запись на урок вождения</h3>
+                @include("Instructor.modal.InstructorModal")
 
-                @foreach($instructors as $instructor)
-                    <a href="{{ route("instructorModal", ["instructorId" => $instructor->id]) }}">{{$instructor->name}}</a>
-                     <br>
-                @endforeach
             </div>
         </div>
         <div class="col-md-4">
             <div class="profile-block">
-                <h3>Ближайший урок вождения</h3>
-                <p>Информация о следующем уроке вождения: дата, время, место проведения и прочее.</p>
+                @include("Instructor.components.NearLessons")
             </div>
         </div>
         <div class="col-md-4">
             <div class="profile-block">
-                <h3>Оцените предыдущий урок вождения</h3>
-                <p>Здесь может быть форма для оценки или ссылка на оставление отзыва о последнем уроке вождения.</p>
+                @include("Instructor.components.GradeLesson")
             </div>
         </div>
     </div>
 </div>
-<script>
-    let modal = document.getElementById('myModal');
-    let closeButton = document.getElementsByClassName('close')[0];
-    let instructorInfo = document.getElementById('instructorInfo');
 
-
-</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

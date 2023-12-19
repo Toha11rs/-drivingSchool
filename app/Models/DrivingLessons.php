@@ -16,9 +16,15 @@ class DrivingLessons extends Model
         "done"
     ];
 
-    public function incstrucors()
+    public function instructor()
     {
-        return $this->hasMany(DrivingInstructors::class, 'driving_instructor_id');
+        return $this->belongsTo(DrivingInstructors::class, 'driving_instructor_id');
     }
+
+//    public function getLastLessonsAttribute()
+//    {
+//        return $this->start_time->orderByDesc("created_at")->get();
+//    }
+
     use HasFactory;
 }
