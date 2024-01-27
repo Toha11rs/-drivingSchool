@@ -2,12 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Statistics;
+use App\Services\UserServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UserServices $userServices)
     {
-        return view("User.Profile");
+        $user = Auth::user();
+        $presentTicket = $userServices->getPresentStatistic($user);
+
+
+
+        return view("User.Profile", compact(
+            "presentTicket",
+            "user",
+        ));
+    }
+
+    public function driving()
+    {
+
+        return view("User.Driving");
+    }
+
+    public function theory(){
+        return view("User.Theory");
+    }
+
+    public function pdd(){
+        return view("User.Pdd");
     }
 }

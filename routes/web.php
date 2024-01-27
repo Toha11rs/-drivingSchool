@@ -1,49 +1,49 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\InstructorController;
 use \App\Http\Controllers\UserController;
-<<<<<<< HEAD
-=======
 use \App\Http\Controllers\mainController;
 
->>>>>>> f6dc55b3a5f913a759a997084d02c7e039ef4daa
 
-use \App\Models\Questions;
-use \App\Models\Answers;
-use \App\Models\Topics;
+Route::get("/", [mainController::class, "main"])->name("main");
+Route::get("/register", [AuthController::class, "create"])->name("register");
+Route::post("/register", [AuthController::class, "store"])->name("register");
+Route::get("/login", [AuthController::class, "createLogin"])->name("login");
+Route::post("/login", [AuthController::class, "storeLogin"]);
 
-<<<<<<< HEAD
+Route::prefix("profile")->middleware('auth')->group(function () {
+    Route::get("", [UserController::class, "index"])->name("profile");
+    Route::get("theory", [UserController::class, "theory"])->name("theory");
+    Route::get("pdd", [UserController::class, "pdd"])->name("pdd");
 
-=======
-Route::get("/", [mainController::class,"main"])->name("main");
->>>>>>> f6dc55b3a5f913a759a997084d02c7e039ef4daa
+    Route::prefix("driving")->group(function () {
+        Route::get("", [InstructorController::class, "index"])->name("driving");
+        Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
+        Route::get("DrivingLessonInfo/{LessonId}", [InstructorController::class, "DrivingLessonModal"])->name("DrivingLessonModal");
+        Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore");
+        Route::post("GradeLesson", [InstructorController::class, "GradeLessonStore"])->name("GradeLessonStore");
+    });
+    Route::prefix("driving")->group(function () {
+        Route::get("", [TheoryController::class, "index"])->name("driving");
 
-Route::get("/register",[AuthController::class,"create"])->name("register");
-Route::post("/register",[AuthController::class,"store"])->name("register");
-
-Route::get("/login",[AuthController::class,"createLogin"])->name("login");
-Route::post("/login",[AuthController::class,"storeLogin"]);
-
-
-Route::get("/profile",[UserController::class,"index"])->name("Profile")->middleware('auth');;
-
-Route::prefix("test")->group(function (){
-    Route::get("",[TestController::class,"index"])->name("index");
-
-    Route::get("/ticket/{ticketId}",[TestController::class,"ticket"])->name("ticket");
-    Route::post("/ticket/{ticketId}",[TestController::class,"ticketStore"])->name("ticketStore");
-
-    Route::get("/topic/{topicId}",[TestController::class,"topic"])->name("topic");
-    Route::get("/exam",[TestController::class,"exam"])->name("exam");
-
-
+    });
 });
 
+Route::prefix("test")->middleware('auth')->group(function () {
+    Route::get("", [TestController::class, "index"])->name("index");
 
+    Route::get("/ticket/{ticketId}", [TestController::class, "ticket"])->name("ticket");
+    Route::post("/ticket/", [TestController::class, "ticketStore"])->name("ticketStore");
 
+    Route::get("/topic/{topicId}", [TestController::class, "topic"])->name("topic");
+    Route::get("/exam", [TestController::class, "exam"])->name("exam");
+});
 
+//Route::get("AdminProfile",[InstrucorController::class,"index"])->name("index");
 
 //Route::get('test1', function () {
 //    $answers = Answers::pluck('question_id')->unique()->sort();
@@ -59,16 +59,6 @@ Route::prefix("test")->group(function (){
 //    dd($missingIds);
 
 Route::get('test1', function () {
-    $answers = Questions::all();
-
-   foreach ($answers as $answer){
-       $img = $answer->image;
-       $update = substr($img, 1);
-       $answer->update([
-          "image"=>$update
-       ]);
-   }
-
 });
 
 

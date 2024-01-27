@@ -10,7 +10,6 @@
 
         if (match && match[1]) {
             const ticketId = match[1];
-            console.log(ticketId);
             const apiUrl = `http://127.0.0.1:8000/api/ticket/${ticketId}`;
 
             $.ajax({
@@ -30,21 +29,26 @@
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
         let incorrectAnswers = [];
+        let UserAnswer = [];
+        let CountIncorrectAnswers = 0;
+        let ticket_number = 0;
+
 
         function showQuestion(index) {
             const question = questions[index];
+            ticket_number = question.ticket_number;
             let questionHtml = `<div class="question">
             <h3>Вопрос ${question.question_number}</h3>
-            <p>${question.question}</p>
-            <img src="${question.image}" alt="sdf">
-
+            <img class="centerque" src="${question.image}" alt="sdf">
+            <p class="questions centerque">${question.question}</p>
             <ul>`;
-            console.log(question.image);
+
             question.answers.forEach(answer => {
-                questionHtml += `<li data-answer-id="${answer.id}">${answer.answer}</li>`;
+                questionHtml += `<li class="question-var" data-answer-id="${answer.id}">${answer.answer}</li>`;
             });
 
-            questionHtml += '</ul></div>';
+            questionHtml += '</ul><div class="hint-text" id="answer-tip"></div> <button class="buttonnext" id="answer-btn">Ответить</button>' +
+                '<button id="next-question-btn" class="buttonnext" style="display:none;">Перейти к следующему вопросу</button></div>';
             $('#question-container').empty().append(questionHtml);
         }
 
@@ -64,23 +68,39 @@
                 selectedAnswer.removeClass('selected');
 
                 if (isCorrect) {
+                    // UserAnswer.push({
+                    //     is_correct:true,
+                    //     question_id: questions[currentQuestionIndex].id,
+                    //     type:"ticket"
+                    // });
+
                     selectedAnswer.addClass('correct');
                     correctAnswers++;
                 } else {
+                    // UserAnswer.push({
+                    //     is_correct:false,
+                    //     question_id: questions[currentQuestionIndex].id,
+                    //     type:"ticket",
+                    // });
+                    CountIncorrectAnswers++;
                     selectedAnswer.addClass('incorrect');
-                    const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct).answer;
-                    incorrectAnswers.push({
-                        question_number: questions[currentQuestionIndex].question_number,
-                        your_answer: selectedAnswer.text(),
-                        correct_answer: correctAnswer
-                    });
+
+                const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.is_correct).answer;
+                incorrectAnswers.push({
+                    question_number: questions[currentQuestionIndex].question_number,
+                    your_answer: selectedAnswer.text(),
+                    correct_answer: correctAnswer,
+                    question_id: questions[currentQuestionIndex].id
+                });
                 }
 
                 $('#answer-btn').hide();
                 $('#next-question-btn').show();
 
                 // Display answer tip
+                $('#answer-tip').text("Пояснение к ответу: " + answerTip).show();
                 $('#answer-tip').text(answerTip).show();
+
             }
         });
 
@@ -114,35 +134,38 @@
                     tbody.append(row);
                 });
             }
-            saveStatistics(correctAnswers, incorrectAnswers);
+
+            if (incorrectAnswers.length > 3) {
+                UserAnswer.push({
+                    is_correct:false,
+                    question_id: ticket_number,
+                    type:"ticket"
+                });
+            }
+            else{
+                UserAnswer.push({
+                    is_correct:true,
+                    question_id: ticket_number,
+                    type:"ticket"
+                });
+            }
+
+            submitFormWithAnswers(UserAnswer)
         }
     });
 
-    function saveStatistics(correctAnswers, incorrectAnswers) {
-        const currentURL = window.location.href;
-        const regex = /\/ticket\/(\d+)/;
-        const match = currentURL.match(regex);
-        const ticketId = match[1];
-        const apiUrl = `{{ route('ticketStore', ['ticketId' => ':ticketId']) }}`.replace(':ticketId', ticketId);
+    function submitFormWithAnswers(UserAnswer) {
 
+        const form = document.getElementById('myForm');
 
-        $.ajax({
-            url: apiUrl,
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                correctAnswers: correctAnswers,
-                incorrectAnswers: incorrectAnswers
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error)
-            }
-        });
+        let stringifiedIncorrectAnswers = JSON.stringify(UserAnswer);
+        form.querySelector('input[name="correctAnswers"]').value = stringifiedIncorrectAnswers;
+        form.querySelector('input[name="incorrectAnswers"]').value = UserAnswer;
+
+        form.submit();
     }
+
+
+
 
 </Script>

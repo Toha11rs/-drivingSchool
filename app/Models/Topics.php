@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topics extends Model
 {
-    protected $fillable = ["topic"];
+    protected $fillable = [
+        "topic",
+        "count_questions",
+        ];
 
 
 
     public function topics()
     {
-        return $this->hasMany(Topics::class, 'topics_id');
+        return $this->hasMany(Questions::class, 'topics_id');
     }
 
     public $timestamps = false;

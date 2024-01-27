@@ -6,6 +6,8 @@
         let incorrectAnswers = [];
         let fakeQuestions = 20;
         let errorCount = 0;
+        let UserAnswer = [];
+
 
         function initializeQuiz() {
             const ticketId = Math.floor(Math.random() * 40) + 1;
@@ -121,12 +123,11 @@
                 });
                 $('.question li.selected').addClass('incorrect');
 
-                if (incorrectAnswers.length === 1) { // Если это первая ошибка пользователя
-                    loadRandomQuestions(); // Загружаем 5 новых вопросов
-                } else if (incorrectAnswers.length === 2) { // Если это вторая ошибка пользователя
-                    loadRandomQuestions(); // Загружаем еще 5 новых вопросов
+                if (incorrectAnswers.length === 1) {
+                    loadRandomQuestions();
+                } else if (incorrectAnswers.length === 2) {
+                    loadRandomQuestions();
                 }
-                console.log(errorCount);
                 if (currentQuestionIndex == 19 && errorCount <= 1) {
 
                     fakeQuestions = 25;
@@ -161,6 +162,7 @@
             resultContainer.show();
         }
         initializeQuiz();
+
     });
 
 </script>

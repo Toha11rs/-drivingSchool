@@ -6,7 +6,7 @@
     let nextButton = document.getElementById('next-btn');
     let selectedAnswer = null;
     let answeredQuestions = new Array(questions.length).fill(false);
-
+    let UserAnswer = [];
     function showQuestion() {
         if (currentQuestionIndex < questions.length) {
             let currentQuestion = questions[currentQuestionIndex];
@@ -45,6 +45,8 @@
             nextButton.style.display = 'none';
         } else {
             resultText.textContent = 'Тест завершен!';
+            console.log(UserAnswer);
+            submitFormWithAnswers(UserAnswer);
             document.getElementById('quiz').innerHTML = '';
         }
 
@@ -58,9 +60,21 @@
         if (isCorrect) {
             resultText.textContent = 'Правильно!';
             selectedAnswer.classList.add('correct');
+
+            UserAnswer.push({
+                is_correct:true,
+                question_id: questions[currentQuestionIndex].id,
+                type:"topic"
+            });
         } else {
             resultText.textContent = 'Неправильно.';
             selectedAnswer.classList.add('incorrect');
+
+            UserAnswer.push({
+                is_correct:false,
+                question_id: questions[currentQuestionIndex].id,
+                type:"topic"
+            });
         }
 
         answerTipElement.textContent = answerTip; // Отображаем объяснение
@@ -80,7 +94,6 @@
             if (answered) {
                 let question = questions[index];
                 let selectedAnswer = question.answers.find(answer => answer.selected);
-                console.log(selectedAnswer);
                 if (selectedAnswer) {
                     if (selectedAnswer.is_correct) {
                         square.classList.add('correct');
@@ -111,4 +124,14 @@
 
     showQuestion();
 
+
+    function submitFormWithAnswers(UserAnswer) {
+
+        const form = document.getElementById('myForm');
+
+        let StringIncorrectAnswers = JSON.stringify(UserAnswer);
+        console.log(StringIncorrectAnswers)
+        form.querySelector('input[name="correctAnswers"]').value = StringIncorrectAnswers;
+        form.submit();
+    }
 </Script>

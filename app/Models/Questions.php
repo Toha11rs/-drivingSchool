@@ -18,7 +18,11 @@ class Questions extends Model
 
     public function topics()
     {
-        return $this->belongsTo(Questions::class);
+        return $this->belongsTo(Topics::class,'topic_id');
+    }
+    public function statistic()
+    {
+        return $this->belongsTo(Statistics::class);
     }
     use HasFactory;
 }
