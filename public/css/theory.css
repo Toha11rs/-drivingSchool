@@ -8,6 +8,12 @@
 }
 
 .main-content {
-    margin-left: 25%; /* Чтобы контент не перекрывал боковую панель */
+    margin-left: 25%;
     padding: 20px;
+}
+
+.scrollable-list {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0 0% 50%);
 }
