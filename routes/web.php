@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PDDController;
+use App\Http\Controllers\TheoryController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\AuthController;
@@ -15,13 +17,20 @@ Route::post("/register", [AuthController::class, "store"])->name("register");
 Route::get("/login", [AuthController::class, "createLogin"])->name("login");
 Route::post("/login", [AuthController::class, "storeLogin"]);
 
+Route::get("pdd/{TopicId}", [UserController::class, "theory"])->name("theory");
+Route::get('pdd/change-1-sept-2023',[PDDController::class,'septInfo'])->name("septInfo");
+
+
 Route::prefix("profile")->middleware('auth')->group(function () {
     Route::get("", [UserController::class, "index"])->name("profile");
-    Route::get("theory", [UserController::class, "theory"])->name("theory");
-    Route::get("pdd", [UserController::class, "pdd"])->name("pdd");
+
+    Route::prefix("lessons")->group(function () {
+        Route::get("{TopicId}", [LessonController::class, "MyLesson"])->name("MyLesson"); //МОИ УРОКИ
+    });
+
 
     Route::prefix("driving")->group(function () {
-        Route::get("", [InstructorController::class, "index"])->name("driving");
+        Route::get("info", [InstructorController::class, "index"])->name("driving");
         Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
         Route::get("DrivingLessonInfo/{LessonId}", [InstructorController::class, "DrivingLessonModal"])->name("DrivingLessonModal");
         Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore");
