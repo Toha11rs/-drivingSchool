@@ -47,8 +47,9 @@
                 questionHtml += `<li class="question-var" data-answer-id="${answer.id}">${answer.answer}</li>`;
             });
 
-            questionHtml += '</ul><div class="hint-text" id="answer-tip"></div> <button class="buttonnext" id="answer-btn">Ответить</button>' +
+            questionHtml += '</ul><div class="hint-text" id="answer-tip" style = "display:none"></div> <button class="buttonnext" id="answer-btn">Ответить</button>' +
                 '<button id="next-question-btn" class="buttonnext" style="display:none;">Перейти к следующему вопросу</button></div>';
+
             $('#question-container').empty().append(questionHtml);
         }
 
@@ -63,25 +64,14 @@
             if (selectedAnswer.length > 0) {
                 const answerId = selectedAnswer.data('answer-id');
                 const isCorrect = questions[currentQuestionIndex].answers.find(answer => answer.id === answerId).is_correct;
-                const answerTip = questions[currentQuestionIndex].answer_tip;
+
 
                 selectedAnswer.removeClass('selected');
 
                 if (isCorrect) {
-                    // UserAnswer.push({
-                    //     is_correct:true,
-                    //     question_id: questions[currentQuestionIndex].id,
-                    //     type:"ticket"
-                    // });
-
                     selectedAnswer.addClass('correct');
                     correctAnswers++;
                 } else {
-                    // UserAnswer.push({
-                    //     is_correct:false,
-                    //     question_id: questions[currentQuestionIndex].id,
-                    //     type:"ticket",
-                    // });
                     CountIncorrectAnswers++;
                     selectedAnswer.addClass('incorrect');
 
@@ -96,8 +86,8 @@
 
                 $('#answer-btn').hide();
                 $('#next-question-btn').show();
+                const answerTip = questions[currentQuestionIndex].answer_tip;
 
-                // Display answer tip
                 $('#answer-tip').text("Пояснение к ответу: " + answerTip).show();
                 $('#answer-tip').text(answerTip).show();
 
@@ -164,8 +154,6 @@
 
         form.submit();
     }
-
-
 
 
 </Script>
