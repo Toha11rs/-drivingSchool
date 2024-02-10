@@ -4,8 +4,9 @@
 @extends('layouts.app')
 @section('title', 'Тестовый билет')
 @section('content')
+@include("components.header.headerProfile")
 
-
+<div class="container">
 <div id="question-container"></div>
 <button id="answer-btn">Ответить</button>
 <p id="counter"></p>
@@ -23,9 +24,14 @@
     <tbody>
     </tbody>
 </table>
+</div>
 
+
+
+@include("components.footer.footerMain")
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @include("BladeJs.ExamJS")
 
 @endsection
+

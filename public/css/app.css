@@ -26,6 +26,10 @@
     display: flex;
     margin-top: 20px;
 }
+.progress1 {
+    display: inline-block;
+    margin-top: 20px;
+}
 
 .square {
     width: 20px;

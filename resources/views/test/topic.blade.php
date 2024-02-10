@@ -12,23 +12,49 @@
 @endsection
 @section('content')
 
-<div id="progress"></div>
-<div id="quiz pdd-ticket" style="background: #f5f5f5;">
+@include("components.header.headerProfile")
+
+<div class="container">
+<div id="quiz pdd-ticket" class="question">
+    <div id="progress" style="display:inline-block"></div>
     <p id="counter"></p>
-    <h2 id="question"></h2>
-    <img id="question-image" src="" alt="Фото вопроса">
-    <ul id="options"></ul>
+    <img class="centerque" id="question-image" src="" alt="Фото вопроса">
+    <h2 class="questions centerque" id="question"></h2>
+    <ul id="options">
+        
+    </ul>
     <p id="result"></p>
 
-    <button id="answer-btn" style="display: none;">Ответить</button>
-    <button id="next-btn" style="display: none;">Следующий вопрос</button>
-    <div id="answer-tip"></div>
+    <button id="answer-btn" style="display: none;" class="buttonnext">Ответить</button>
+    <button id="next-btn" style="display: none;" class="buttonnext">Следующий вопрос</button>
+    <div class="hint-text" id="answer-tip"></div>
 </div>
 
 <form id="myForm" action="{{route("ticketStore")}}" method="post">
     @csrf
     <input type="hidden" name="correctAnswers" >
 </form>
+</div>
+
+@include("components.footer.footerMain")
 
 @include("BladeJs.TopicJS")
 @endsection
+
+<style>
+    .square {
+    
+    border-radius: 2px;
+    color: var(--link,#1b75cc);
+    float: left;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 40px;
+  
+    }
+</style>
