@@ -41,27 +41,27 @@
           <div class="header__navbar">
               <ul class="list-unstyled">
                   <li class="has-sub">
-                      <a href="#">
+                      <a style="text-decoration: none;" href="#">
                           <span class="bot-line"></span>
                           Главная
                       </a>
                   </li>
                   <li>
-                      <a href="#">
+                      <a style="text-decoration: none;" href="#">
 
                           <span class="bot-line"></span>О нас</a>
                   </li>
                   <li>
-                      <a href="table.html">
+                      <a style="text-decoration: none;" href="table.html">
 
                           <span class="bot-line"></span>Контакты</a>
                   </li>
                   <li class="has-sub">
-                      <a href="#">
+                      <a style="text-decoration: none;" href="#">
                           <span class="bot-line"></span>Услуги и цены</a>
                   </li>
                   <li class="has-sub">
-                    <a href="#">
+                    <a style="text-decoration: none;" href="#">
                         <span class="bot-line"></span>FAQ</a>
                 </li>
 
@@ -72,9 +72,9 @@
                   <div class="account-item account-item--style2 clearfix js-item-menu">
                       <div class="content">
                           @if($user)
-                          <a class="js-acc-btn" href="#">{{$user->name}} </a>
+                          <a style="text-decoration: none;" class="js-acc-btn" href="#">{{$user->name}} </a>
                           @else
-                              <a class="js-acc-btn" href="#">Войти </a>
+                              <a style="text-decoration: none;" class="js-acc-btn" href="#">Войти </a>
                           @endif
                       </div>
                       <div class="account-dropdown js-dropdown">
@@ -83,7 +83,7 @@
                               <div class="content">
                                   <h5 class="name">
                                       @if($user)
-                                      <a href="#">{{$user->name}}</a>
+                                      <a style="text-decoration: none;" href="#">{{$user->name}}</a>
                                       @else
                                           <a href="#">Войти</a>
                                   </h5>
@@ -92,21 +92,21 @@
                           </div>
                           <div class="account-dropdown__body">
                             <div class="account-dropdown__item">
-                              <a href="#">
+                              <a style="text-decoration: none;" href="#">
                                   <i class="zmdi zmdi-account"></i>Обучение</a>
                           </div>
                               <div class="account-dropdown__item">
-                                  <a href="#">
+                                  <a style="text-decoration: none;" href="#">
                                       <i class="zmdi zmdi-account"></i>Аккаунт</a>
                               </div>
 
                               <div class="account-dropdown__item">
-                                  <a href="#">
+                                  <a style="text-decoration: none;" href="#">
                                       <i class="zmdi zmdi-money-box"></i>Настройки</a>
                               </div>
                           </div>
                           <div class="account-dropdown__footer">
-                              <a href="#">
+                              <a style="text-decoration: none;" href="#">
                                   <i class="zmdi zmdi-power"></i>Выйти</a>
                           </div>
                       </div>
@@ -498,11 +498,11 @@
         <div class="col-lg-3 col-xs-12 links">
           <h4 class="mt-lg-0 mt-sm-3">Меню</h4>
             <ul class="m-0 p-0">
-              <li><a href="#">Главная страница</a></li>
-              <li><a href="#">Курсы обучения</a></li>
-              <li><a href="#">Наши инструктора</a></li>
-              <li><a href="#">FAQ</a></li>
-              <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Политика конфиденциальности</a></li>
+              <li><a style="text-decoration: none;" href="#">Главная страница</a></li>
+              <li><a style="text-decoration: none;" href="#">Курсы обучения</a></li>
+              <li><a style="text-decoration: none;" href="#">Наши инструктора</a></li>
+              <li><a style="text-decoration: none;" href="#">FAQ</a></li>
+              <li><a style="text-decoration: none;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Политика конфиденциальности</a></li>
 
             </ul>
         </div>
