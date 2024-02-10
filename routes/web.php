@@ -18,7 +18,7 @@ Route::get("/login", [AuthController::class, "createLogin"])->name("login");
 Route::post("/login", [AuthController::class, "storeLogin"]);
 
 Route::get("pdd/{TopicId}", [UserController::class, "theory"])->name("theory");
-Route::get('pdd/change-1-sept-2023',[PDDController::class,'septInfo'])->name("septInfo");
+Route::get('pdd/change-1-sept-2023', [PDDController::class, 'septInfo'])->name("septInfo");
 
 
 Route::prefix("profile")->middleware('auth')->group(function () {
