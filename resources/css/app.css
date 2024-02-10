@@ -1,0 +1,13 @@
+.sidebar {
+    background-color: #f8f9fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+}
+
+.main-content {
+    margin-left: 25%; /* Чтобы контент не перекрывал боковую панель */
+    padding: 20px;
+}
