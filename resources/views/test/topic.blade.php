@@ -16,7 +16,7 @@
 <div id="quiz pdd-ticket" style="background: #f5f5f5;">
     <p id="counter"></p>
     <h2 id="question"></h2>
-    <img id="question-image" src="" alt="Фото вопроса" style="display: none;">
+    <img id="question-image" src="" alt="Фото вопроса">
     <ul id="options"></ul>
     <p id="result"></p>
 

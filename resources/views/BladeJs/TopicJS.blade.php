@@ -1,9 +1,11 @@
 <Script>
     let questions = {!! $questions->toJson() !!};
+
     let currentQuestionIndex = 0;
     let resultText = document.getElementById('result');
     let answerButton = document.getElementById('answer-btn');
     let nextButton = document.getElementById('next-btn');
+    let questionImage = document.getElementById('question-image');
     let selectedAnswer = null;
     let answeredQuestions = new Array(questions.length).fill(false);
     let UserAnswer = [];
@@ -14,6 +16,7 @@
             let optionsList = document.getElementById('options');
             let counterElement = document.getElementById('counter');
 
+            questionImage.src = currentQuestion.image;
             questionElement.textContent = currentQuestion.question;
             optionsList.innerHTML = '';
             counterElement.textContent = `Вопрос ${currentQuestionIndex + 1} из ${questions.length}`;

@@ -22,7 +22,7 @@ Route::get('pdd/change-1-sept-2023', [PDDController::class, 'septInfo'])->name("
 
 
 Route::prefix("profile")->middleware('auth')->group(function () {
-    Route::get("", [UserController::class, "index"])->name("profile");
+    Route::get("", [UserController::class, "index"])->name("profile"); //ГЛАВНАЯ СТРАНИЦА
 
     Route::prefix("lessons")->group(function () {
         Route::get("{TopicId}", [LessonController::class, "MyLesson"])->name("MyLesson"); //МОИ УРОКИ
@@ -30,26 +30,22 @@ Route::prefix("profile")->middleware('auth')->group(function () {
 
 
     Route::prefix("driving")->group(function () {
-        Route::get("info", [InstructorController::class, "index"])->name("driving");
-        Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal");
-        Route::get("DrivingLessonInfo/{LessonId}", [InstructorController::class, "DrivingLessonModal"])->name("DrivingLessonModal");
-        Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore");
-        Route::post("GradeLesson", [InstructorController::class, "GradeLessonStore"])->name("GradeLessonStore");
-    });
-    Route::prefix("driving")->group(function () {
-        Route::get("", [TheoryController::class, "index"])->name("driving");
-
+        Route::get("info", [InstructorController::class, "index"])->name("driving"); //ПРОФИЛЬ УЧЕНИКА
+        Route::get("instructorInfo/{instructorId}", [InstructorController::class, "instructorModal"])->name("instructorModal"); //ИНФОРМАЦИЯ О ИНСТРУКТОРЕ
+        Route::get("DrivingLessonInfo/{LessonId}", [InstructorController::class, "DrivingLessonModal"])->name("DrivingLessonModal"); //ИНФОРМАЦИЯ О БУДУЩИХ УРОКАХ ПО ВОЖДЕНИЮ
+        Route::post("instructorInfo/{instructorId}", [InstructorController::class, "instructorModalStore"])->name("instructorModalStore"); //
+        Route::post("GradeLesson", [InstructorController::class, "GradeLessonStore"])->name("GradeLessonStore");//
     });
 });
 
 Route::prefix("test")->middleware('auth')->group(function () {
-    Route::get("", [TestController::class, "index"])->name("index");
+    Route::get("", [TestController::class, "index"])->name("index");//
 
-    Route::get("/ticket/{ticketId}", [TestController::class, "ticket"])->name("ticket");
-    Route::post("/ticket/", [TestController::class, "ticketStore"])->name("ticketStore");
+    Route::get("/ticket/{ticketId}", [TestController::class, "ticket"])->name("ticket");//ВПОРОСЫ ПО БИЛЕТАМ
+    Route::post("/ticket/", [TestController::class, "ticketStore"])->name("ticketStore");//
 
-    Route::get("/topic/{topicId}", [TestController::class, "topic"])->name("topic");
-    Route::get("/exam", [TestController::class, "exam"])->name("exam");
+    Route::get("/topic/{topicId}", [TestController::class, "topic"])->name("topic");// ВОПРОСЫ ПОЕ ТЕМАМ
+    Route::get("/exam", [TestController::class, "exam"])->name("exam");// ЭКЗАМЕН
 });
 
 //Route::get("AdminProfile",[InstrucorController::class,"index"])->name("index");

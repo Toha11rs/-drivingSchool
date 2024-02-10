@@ -11,7 +11,6 @@
     <div class="container">
 <div id="question-container"></div>
 
-
 <table id="result-table" style="display:none;">
     <thead>
     <tr>
